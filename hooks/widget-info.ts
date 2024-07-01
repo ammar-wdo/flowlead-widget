@@ -12,7 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 export const useWidget = (slug:string)=>{
 
     const fetchWidgetCompany = async()=>{
-        const { data } = await axios.get<{success:boolean,data?:Company & {forms:Form[]}}>(`http://localhost:3000/api/company/${slug}`);
+        const { data } = await axios.get<{success:boolean,data?:Company & {forms:Form[]}}>(`${process.env.NEXT_PUBLIC_BACKEND_URL!}/api/company/${slug}`);
         return data.data;
     }
 
