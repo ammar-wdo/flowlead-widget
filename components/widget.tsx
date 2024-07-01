@@ -9,6 +9,7 @@ import { Loader } from "lucide-react";
 
 type Props = {
   companySlug: string;
+
 };
 
 const Widget = ({ companySlug }: Props) => {
@@ -16,6 +17,7 @@ const Widget = ({ companySlug }: Props) => {
   const { data: company, isLoading, isError, error } = useWidget(companySlug);
   return (
     <div className="min-w-[400px] w-[550px]">
+  
       <AnimatePresence>
         {open && (
           <Motion

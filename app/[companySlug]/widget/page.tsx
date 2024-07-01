@@ -3,6 +3,8 @@
 
 import React from 'react'
 import Widget from '../../../components/widget'
+import axios from 'axios'
+import { Company, Form } from '@/types'
 
 type Props = {params:{companySlug:string}}
 
