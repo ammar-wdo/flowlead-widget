@@ -19,7 +19,7 @@ const Widget = ({ companySlug }: Props) => {
 
   
   return (
-    <div className="min-w-[400px] w-[550px]">
+    <div className="w-[98vw]  lg:min-w-[500px]   max-w-[600px]">
   
       <AnimatePresence>
         {open && (
@@ -29,7 +29,7 @@ const Widget = ({ companySlug }: Props) => {
             exit={{ opacity: 0, y: 20 }}
             className=" mb-3   w-full   z-[999]"
           >
-            <article className="rounded-lg bg-black p-3 h-[800px] overflow-y-auto">
+            <article className="rounded-lg bg-black p-3 h-[90vh] sm:h-[80vh] md:h-[800px]  overflow-y-auto">
               {isLoading && (
                 <div className=" flex items-center justify-center h-full bg-white flex-col">
                   <Loader size={20} className="animate-spin block" />
