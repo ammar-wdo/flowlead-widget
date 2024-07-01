@@ -6,6 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { useWidget } from "../hooks/widget-info";
 import Motion from "./motion";
 import { Loader } from "lucide-react";
+import WidgetContent from "./widjet-content";
 
 type Props = {
   companySlug: string;
@@ -15,6 +16,8 @@ type Props = {
 const Widget = ({ companySlug }: Props) => {
   const [open, setOpen] = useState(false);
   const { data: company, isLoading, isError, error } = useWidget(companySlug);
+
+  
   return (
     <div className="min-w-[400px] w-[550px]">
   
@@ -42,7 +45,7 @@ const Widget = ({ companySlug }: Props) => {
               )}
               {company && (
                 <div className="bg-white rounded-md h-full">
-                  <h3 className="p-2">{company?.name}</h3>
+                 <WidgetContent/>
                 </div>
               )}
             </article>
