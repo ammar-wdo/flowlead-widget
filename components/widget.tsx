@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useWidget } from "../hooks/widget-info";
 import Motion from "./motion";
-import { Loader } from "lucide-react";
+import { ChevronDown, Loader } from "lucide-react";
 import WidgetContent from "./widjet-content";
 import { useSearchParams } from "next/navigation";
 
@@ -32,7 +32,7 @@ const Widget = ({ companySlug }: Props) => {
             exit={{ opacity: 0, y: 20 }}
             className=" mb-3   w-full   z-[999]"
           >
-            <article className="rounded-lg bg-black p-3 h-[90vh] sm:h-[80vh] md:h-[800px]  overflow-y-auto">
+            <article className="rounded-lg bg-black p-3 h-[85vh] sm:h-[80vh] md:h-[800px] max-h-[85vh]   overflow-y-auto">
               {isLoading && (
                 <div className=" flex items-center justify-center h-full bg-white flex-col">
                   <Loader size={20} className="animate-spin block" />
@@ -58,9 +58,10 @@ const Widget = ({ companySlug }: Props) => {
       <button
         onClick={() => setOpen((prev) => !prev)}
         type="button"
-        className="p-1  border-2 rounded-lg  w-fit py-4 px-8 border-black block ml-auto  bg-white font-semibold "
+        className="p-1 border-transparent  border-2 rounded-md  w-fit py-4 px-8 bg-black flex items-center ml-auto  text-white hover:bg-black/80 transition font-semibold "
       >
         Widget
+        <ChevronDown className={open ? "rotate-180 transition ml-3" :"transition ml-3"} />
       </button>
     </div>
   );

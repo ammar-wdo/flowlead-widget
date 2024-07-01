@@ -20,7 +20,7 @@ const WidgetContent = (props: Props) => {
   return (
     <div className="p-3">
         <div className="flex items-center gap-3">
-            {selectedForm && <button onClick={()=>setSelectedForm(undefined)}><ArrowLeft/></button>}
+            {selectedForm ? <button onClick={()=>setSelectedForm(undefined)} className="h-8 w-8 p-1 flex items-center justify-center rounded-full hover:bg-gray-100 transition"><ArrowLeft/></button>:<span className="h-8 w-8 p-1"/>}
         <h3 className="font-bold">{company.name}</h3>
         </div>
    
@@ -46,7 +46,7 @@ const WidgetContent = (props: Props) => {
               <article
                 onClick={() => setSelectedForm(form.id)}
                 key={form.id}
-                className="border hover:border-gray-400 rounded-xl p-3 cursor-pointer   transition "
+                className="border hover:border-gray-400 rounded-md p-3 cursor-pointer   transition "
               >
                 <h4 className="font-semibold text-muted-foreground">
                   {form.name}
