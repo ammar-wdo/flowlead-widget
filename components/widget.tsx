@@ -7,6 +7,7 @@ import { useWidget } from "../hooks/widget-info";
 import Motion from "./motion";
 import { Loader } from "lucide-react";
 import WidgetContent from "./widjet-content";
+import { useSearchParams } from "next/navigation";
 
 type Props = {
   companySlug: string;
@@ -14,7 +15,9 @@ type Props = {
 };
 
 const Widget = ({ companySlug }: Props) => {
-  const [open, setOpen] = useState(false);
+
+  const searchParams = useSearchParams()
+  const [open, setOpen] = useState(!!(searchParams.get('openWidget')==="true"));
   const { data: company, isLoading, isError, error } = useWidget(companySlug);
 
   
@@ -55,7 +58,7 @@ const Widget = ({ companySlug }: Props) => {
       <button
         onClick={() => setOpen((prev) => !prev)}
         type="button"
-        className="p-1  border rounded-lg  w-full bg-white font-semibold "
+        className="p-1  border-2 rounded-lg  w-fit py-4 px-8 border-black block ml-auto  bg-white font-semibold "
       >
         Widget
       </button>

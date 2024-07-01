@@ -46,7 +46,7 @@ const WidgetContent = (props: Props) => {
               <article
                 onClick={() => setSelectedForm(form.id)}
                 key={form.id}
-                className="shadow-md rounded-xl p-3 cursor-pointer hover:shadow-lg transition "
+                className="border hover:border-gray-400 rounded-xl p-3 cursor-pointer   transition "
               >
                 <h4 className="font-semibold text-muted-foreground">
                   {form.name}
