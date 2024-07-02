@@ -71,7 +71,7 @@ const fieldTypeArray =[
     'date'
   ]
 
-  const fieldTypeConst = [
+  export const fieldTypeConst = [
     'email',
     'name',
     'text',
@@ -238,3 +238,9 @@ const formSchema = z.object({
 
   export type Company = z.infer<typeof companySchema>
   export type Form = z.infer<typeof formSchema> 
+  export type FormWithCompany = Form & {company:{name:string,companyEmail:string}}
+  export type ComparisonOperator =  typeof comparisonOperatorConst[number]
+  export type Rule = z.infer<typeof ruleSchema>
+  export type Element = z.infer<typeof elementSchema>
+  export type FieldType = typeof fieldTypeConst[number]
+  export type Service = z.infer<typeof serviceSchema>
