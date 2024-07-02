@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {motion} from 'framer-motion'
 import {
   Select,
   SelectContent,
@@ -375,7 +376,7 @@ const FormComponent = ({ form }: Props) => {
     }
   };
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-4 min-h-screen">
+    <section className="grid grid-cols-1 lg:grid-cols-4     items-stretch  min-h-screen   ">
       <LeftPart
         form={form}
         renderElement={renderElement}
@@ -423,16 +424,16 @@ const LeftPart = ({
   isLoading: boolean;
 }) => {
   return (
-    <article className="lg:col-span-3 p-12">
-      <h2 className="font-semibold tracking-wider">{form.name}</h2>
+    <article className="lg:col-span-3 p-0 md:p-4 flex flex-col flex-1">
+      <h2 className="font-semibold tracking-wider p-4">{form.name}</h2>
       <FormPreviewComponent {...formPreview}>
-        <section className="bg-white px-6 pb-12 pt-4 max-w-[800px] w-full min-h-[500px] h-full flex flex-col">
+        <section className=" px-3   pt-4 max-w-[800px] w-full     ">
           {steps?.length > 1 && (
             <StepsIndicator steps={steps.length} currentStep={currentStep} />
           )}
           <form
             onSubmit={formPreview.handleSubmit(onSubmit)}
-            className="flex flex-col gap-8 flex-1 mt-12"
+            className="flex flex-col gap-8 flex-1 mt-12 pb-8  "
           >
             {steps[currentStep].map((element) => renderElement(element))}
 
@@ -522,7 +523,8 @@ const RightPart = ({
 
   return (
     <article className="hidden lg:block bg-gradient-to-b from-indigo-400 via-indigo-600 to-indigo-700 p-12">
-      <h1 className="text-white text-xl">Summary</h1>
+      <div className="sticky top-12">
+      <h1 className="text-white text-xl ">Summary</h1>
       {!!chosenServices.length && (
         <div className="mt-6">
           {chosenServices.map((el, index) => {
@@ -531,9 +533,11 @@ const RightPart = ({
             // Handle the case where the value is an array
             if (Array.isArray(value)) {
               return value.map((service) => (
-                <div
+                <motion.div
+                initial={{opacity:0,y:20}}
+                animate={{opacity:1,y:0}}
                   key={`option-${service.id}`}
-                  className="flex items-start justify-between mb-2"
+                  className="flex items-start justify-between mb-2 mt-5"
                 >
                   <div className="flex flex-col">
                     <p className="text-xs text-white">{service.name}</p>
@@ -545,7 +549,7 @@ const RightPart = ({
                   <div>
                     <p className="text-xs text-white">${service.price}</p>
                   </div>
-                </div>
+                </motion.div>
               ));
             }
 
@@ -553,7 +557,11 @@ const RightPart = ({
             if (value && typeof value === "object") {
               const service = value;
               return (
-                <div className="flex items-start justify-between mb-2">
+                <motion.div 
+                key={'static'}
+                initial={{opacity:0,y:20}}
+                animate={{opacity:1,y:0}}
+                className="flex items-start justify-between mb-2 mt-5">
                   <div className="flex flex-col">
                     <p className="text-xs text-white">{service.name}</p>
                     <p className="text-xs text-white">
@@ -564,7 +572,7 @@ const RightPart = ({
                   <div>
                     <p className="text-xs text-white">${service.price}</p>
                   </div>
-                </div>
+                </motion.div>
               );
             }
 
@@ -573,17 +581,27 @@ const RightPart = ({
         </div>
       )}
       {!!chosenServices.length && (
-        <div className="h-[1px] w-full bg-white/20 mt-4" />
+        <motion.div
+        initial={{opacity:0,y:20}}
+        animate={{opacity:1,y:0}}
+         className="h-[1px] w-full bg-white/20 mt-8" />
       )}
       {!!chosenServices.length && (
-        <div className="mt-2 flex justify-between">
-          <div>
+        <motion.div 
+        initial={{opacity:0,x:-20}}
+        animate={{opacity:1,x:0}}
+        className="mt-2 flex justify-between">
+          <div
+             
+          >
             <p className="text-xs text-white">Total</p>
             <p className="text-xs text-white/60">USD</p>
           </div>
           <p className="text-xs text-white">{totalValue}</p>
-        </div>
+        </motion.div>
       )}
+      </div>
+   
     </article>
   );
 };

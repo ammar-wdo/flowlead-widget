@@ -21,7 +21,10 @@ export default function RootLayout({
   
       <body className={inter.className}>
       <QueryProvider>
+        <main className="min-h-screen">
         {children}
+        </main>
+      
         <Toaster richColors position="top-center" />
       </QueryProvider>
       </body>

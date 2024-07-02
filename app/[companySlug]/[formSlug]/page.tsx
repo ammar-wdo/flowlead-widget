@@ -15,12 +15,12 @@ const page = async({params:{companySlug,formSlug}}: Props) => {
 console.log(data)
 if(!data.success || !data.data)
 
-  return <div className='min-h-screen flex items-center justify-center'>
+  return <div className=' flex items-center justify-center'>
     <h3 className='text-rose-500 font-semibold'>Ooops...Something went wrong</h3>
   </div>
 
   return (
-    <div>
+    <div className='   '>
  <FormComponent form={data.data} />
     </div>
   )
