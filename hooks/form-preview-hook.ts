@@ -63,10 +63,7 @@ export const useFormPreview = (form: FormWithCompany) => {
     try {
       
   const formValues = formPreview.watch();
-      const res = {success:true,message:'',error:''}
-if(!res.success) return toast.error(res.error)
-
-  toast.success(res.message)
+alert(JSON.stringify(values,null,2))
     
 
 
