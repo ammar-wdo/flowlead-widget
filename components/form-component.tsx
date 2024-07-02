@@ -4,6 +4,7 @@ import { useFormPreview } from "@/hooks/form-preview-hook";
 import { Element, Form, FormWithCompany, Service } from "@/types";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { v4 as uuidv4 } from "uuid";
 import {
   Form as FormPreviewComponent,
   FormControl,
@@ -60,6 +61,22 @@ const FormComponent = ({ form }: Props) => {
   } = useFormPreview(form);
   const isLoading = formPreview.formState.isSubmitting;
   const formValues = formPreview.watch();
+
+  const chosenServices = Object.entries(formValues)
+    .filter(([key, value], idex) => key.endsWith("-service"))
+    .map(([key, value]) => ({
+      [key]: value as { name: string; price: number; quantity: number },
+    }))
+    .filter((item) => {
+      const entries = Object.entries(item);
+      if (entries.length === 0) {
+        return false;
+      }
+      const [key, value] = entries[0];
+      return value && Object.keys(value).length > 0;
+    });
+
+
 
   const renderElement = (element: Element) => {
     const fieldElement = element.field;
@@ -371,7 +388,7 @@ const FormComponent = ({ form }: Props) => {
         labels={labels}
         isLoading={isLoading}
       />
-      <article className="hidden lg:block bg-gradient-to-b from-indigo-400 via-indigo-600 to-indigo-700"></article>
+      <RightPart chosenServices={chosenServices} />
     </section>
   );
 };
@@ -388,7 +405,7 @@ const LeftPart = ({
   setCurrentStep,
   handleNext,
   labels,
-  isLoading
+  isLoading,
 }: {
   formPreview: UseFormReturn<{
     [x: string]: any;
@@ -402,8 +419,8 @@ const LeftPart = ({
   }) => Promise<string | number | undefined>;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   handleNext: () => Promise<void>;
-  labels:(string | null)[],
-  isLoading:boolean
+  labels: (string | null)[];
+  isLoading: boolean;
 }) => {
   return (
     <article className="lg:col-span-3 p-12">
@@ -456,6 +473,117 @@ const LeftPart = ({
           </form>
         </section>
       </FormPreviewComponent>
+    </article>
+  );
+};
+
+const RightPart = ({
+  chosenServices,
+}: {
+  chosenServices: {
+    [x: string]: {
+      name: string;
+      price: number;
+      quantity: number;
+    };
+  }[];
+}) => {
+
+
+  const calculateTotalPrice = (
+    formValues: {
+      [x: string]: {
+        name: string;
+        price: number;
+        quantity: number;
+      };
+    }[]
+  ): number => {
+    let totalPrice = 0;
+
+    formValues.forEach((formValue) => {
+      Object.entries(formValue).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          // Loop through array of services
+          value.forEach((service) => {
+            totalPrice += service.price * service.quantity;
+          });
+        } else if (typeof value === "object" && value !== null) {
+          // Single service object
+          totalPrice += value.price * value.quantity;
+        }
+      });
+    });
+
+    return totalPrice;
+  };
+
+  const totalValue = calculateTotalPrice(chosenServices)
+
+  return (
+    <article className="hidden lg:block bg-gradient-to-b from-indigo-400 via-indigo-600 to-indigo-700 p-12">
+      <h1 className="text-white text-xl">Summary</h1>
+      {!!chosenServices.length && (
+        <div className="mt-6">
+          {chosenServices.map((el, index) => {
+            const [key, value] = Object.entries(el)[0];
+
+            // Handle the case where the value is an array
+            if (Array.isArray(value)) {
+              return value.map((service) => (
+                <div
+                  key={`option-${service.id}`}
+                  className="flex items-start justify-between mb-2"
+                >
+                  <div className="flex flex-col">
+                    <p className="text-xs text-white">{service.name}</p>
+                    <p className="text-xs text-white">
+                      <span className="text-white/60">Qty</span>{" "}
+                      {service.quantity}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-white">${service.price}</p>
+                  </div>
+                </div>
+              ));
+            }
+
+            // Handle the case where the value is a single object
+            if (value && typeof value === "object") {
+              const service = value;
+              return (
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex flex-col">
+                    <p className="text-xs text-white">{service.name}</p>
+                    <p className="text-xs text-white">
+                      <span className="text-white/60">Qty</span>{" "}
+                      {service.quantity}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-white">${service.price}</p>
+                  </div>
+                </div>
+              );
+            }
+
+            return null; // Return null if value is not an array or an object
+          })}
+        </div>
+      )}
+      {!!chosenServices.length && (
+        <div className="h-[1px] w-full bg-white/20 mt-4" />
+      )}
+      {!!chosenServices.length && (
+        <div className="mt-2 flex justify-between">
+          <div>
+            <p className="text-xs text-white">Total</p>
+            <p className="text-xs text-white/60">USD</p>
+          </div>
+          <p className="text-xs text-white">{totalValue}</p>
+        </div>
+      )}
     </article>
   );
 };
@@ -1337,8 +1465,6 @@ const DatePickerView = ({
     </Popover>
   );
 };
-
-
 
 type StepsIndicatorProps = {
   steps: number;
