@@ -235,7 +235,17 @@ export const generateSingleFieldSchema = (
   isRequired: boolean
 ) => {
   if (!field) return null;
-
+  const dateTransformer = z.preprocess((val) => {
+    if (typeof val === 'string' || val instanceof Date) {
+      const date = new Date(val);
+      if (!isNaN(date.getTime())) {
+        return date;
+      }
+    }
+    return undefined;
+  }, z.date().refine((val) => val !== undefined, {
+    message: "Invalid date",
+  }));
   let fieldSchema;
 
   switch (field.type) {
@@ -392,7 +402,7 @@ export const generateSingleFieldSchema = (
 
       break;
     case "date":
-      fieldSchema = z.date();
+      fieldSchema = dateTransformer;
       if (!isRequired) {
         fieldSchema = fieldSchema.optional();
       } else {
