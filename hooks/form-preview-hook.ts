@@ -76,13 +76,13 @@ export const useFormPreview = (form: FormWithCompany) => {
     // return alert(JSON.stringify(values,undefined,2))
     try {
       const formValues = formPreview.watch();
-
+// alert(JSON.stringify(formValues))
       const { data } = await axios.post<{
         success: boolean;
         error?: string;
         message?: string;
       }>(`${process.env.NEXT_PUBLIC_BACKEND_URL!}/api/submission`, {
-        values,
+        values:values,
         companyId: form.companyId,
         elements: form.elements,
         formValues: formValues,

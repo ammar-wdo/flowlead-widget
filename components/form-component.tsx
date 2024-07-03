@@ -469,7 +469,7 @@ const LeftPart = ({
                   )}
                 </Button>
               )}
-              {/* {JSON.stringify(formPreview.formState.errors)} */}
+              {JSON.stringify(formPreview.watch(),undefined,2)}
             </div>
           </form>
         </section>
@@ -750,7 +750,7 @@ const ServiceCheckBoxView = ({
   field,
 }: {
   serviceElement: Service;
-  fieldValue: { id: string; price: number; quantity: number }[];
+  fieldValue: { id: string; price: number; quantity: number,taxPercentage:number }[];
   formPreview: UseFormReturn<
     {
       [x: string]: any;
@@ -790,6 +790,7 @@ const ServiceCheckBoxView = ({
                       quantity: 1,
                       serviceName: serviceElement.name,
                       serviceId: serviceElement.id,
+                      taxPercentage:serviceElement.taxPercentage
                     },
                   ])
                 : field.onChange(
@@ -935,7 +936,7 @@ const ServiceRadioView = ({
   field,
 }: {
   serviceElement: Service;
-  fieldValue: { id: string; price: number; quantity: number };
+  fieldValue: { id: string; price: number; quantity: number ,taxPercentage:number};
   formPreview: UseFormReturn<
     {
       [x: string]: any;
@@ -969,6 +970,7 @@ const ServiceRadioView = ({
                   quantity: 1,
                   serviceName: serviceElement.name,
                   serviceId: serviceElement.id,
+                  taxPercentage:serviceElement.taxPercentage
                 })
               }
               key={option.id}
@@ -1090,7 +1092,7 @@ const ServiceDropDownView = ({
   field,
 }: {
   serviceElement: Service;
-  fieldValue: { id: string; price: number; quantity: number };
+  fieldValue: { id: string; price: number; quantity: number ,taxPercentage:number};
   formPreview: UseFormReturn<
     {
       [x: string]: any;
@@ -1124,6 +1126,7 @@ const ServiceDropDownView = ({
             quantity: 1,
             serviceName: serviceElement.name,
             serviceId: serviceElement.id,
+            taxPercentage:serviceElement.taxPercentage
           });
         }}
         defaultValue={field.value}
@@ -1288,7 +1291,7 @@ const ServiceSinglepriceView = ({
   field,
 }: {
   serviceElement: Service;
-  fieldValue: { id: string; price: number; quantity: number };
+  fieldValue: { id: string; price: number; quantity: number ,taxPercentage:number};
   formPreview: UseFormReturn<
     {
       [x: string]: any;
@@ -1323,6 +1326,7 @@ const ServiceSinglepriceView = ({
                 quantity: 1,
                 serviceName: serviceElement.name,
                 serviceId: serviceElement.id,
+                taxPercentage:serviceElement.taxPercentage
               })
             : field.onChange(undefined);
         }}

@@ -155,6 +155,7 @@ const fieldSchema = z.object({
     image: optionalString.nullable().optional(),
     enableQuantity: z.boolean(),
     price: z.coerce.number({ message: "Enter valid number please" }).min(1),
+    taxPercentage:z.coerce.number().optional()
   });
 
   const serviceSchema = z.object({
