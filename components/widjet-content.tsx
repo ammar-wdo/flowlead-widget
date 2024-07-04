@@ -3,9 +3,9 @@ import { cn, isFieldVisible } from "@/lib/utils";
 import { Company, Element, Form, Service } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, CalendarIcon, CheckCircle, Circle, Square, SquareCheckBig } from "lucide-react";
+import { ArrowLeft, CalendarIcon, CheckCircle, Circle, Loader, Square, SquareCheckBig } from "lucide-react";
 import React, { useState } from "react";
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,Form as FormPreviewComponent } from "./ui/form";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
@@ -31,7 +31,7 @@ const WidgetContent = (props: Props) => {
   const oneForm = forms.length === 1;
   const form = forms[0];
   return (
-    <div className="p-3">
+    <div className="p-3 flex flex-col flex-1">
         <div className="flex items-center gap-3">
             {selectedForm ? <button onClick={()=>setSelectedForm(undefined)} className="h-8 w-8 p-1 flex items-center justify-center rounded-full hover:bg-gray-100 transition"><ArrowLeft/></button>:<span className="h-8 w-8 p-1"/>}
         <h3 className="font-bold">{company.name}</h3>
@@ -44,6 +44,7 @@ const WidgetContent = (props: Props) => {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
+            className="flex flex-col flex-1"
           >
             <SelectedForm form={form} companyEmail={company.companyEmail} companyname={company.name} />
           </motion.div>
@@ -401,16 +402,87 @@ const SelectedForm = ({ form ,companyname,companyEmail}: { form: Form ,companyna
   };
 
   return (
-    <section className="mt-4">
-      <h4 className="font-semibold text-muted-foreground">{form.name}</h4>
+    <section className="mt-4 flex flex-col flex-1 justify-between">
+    <h4 className="font-semibold">{form.name}</h4>
+    {form.description && <p className="" dangerouslySetInnerHTML={{ __html: form.description }} />}
+ 
+    <FormPreviewComponent {...formPreview}> 
+  
+        
+          <form
+            onSubmit={formPreview.handleSubmit(onSubmit)}
+            className="flex flex-col gap-4       pt-4  w-full   h-[calc(85vh-145px)] relative   "
+          >
+              {steps?.length > 1 && (
+            <StepsIndicator steps={steps.length} currentStep={currentStep} />
+          )}
+            <div className="h-[95%]  overflow-y-auto px-3 w-full flex flex-col gap-8  mt-2   ">
+          
+            {steps[currentStep].map((element) => <motion.div className="" initial={{x:-20,opacity:0}} animate={{x:0 ,opacity:1}} key={`motion-${element.id}`}>{renderElement(element)}</motion.div>)}
+            </div>
+           
 
-    </section>
+            <div className="flex flex-col gap-1 mt-auto w-full justify-end  ">
+            {currentStep < steps.length - 1 && (
+                <Button
+                  className="px-8 py-2 w-full ml-auto bg-second hover:bg-second/80"
+                  type="button"
+                  onClick={handleNext}
+                >
+                  {labels[currentStep] || "Next"}
+                </Button>
+              )}
+                 {currentStep === steps.length - 1 && (
+                <Button
+                  className="px-8 py-2 bg-second w-full hover:bg-second/80"
+                  disabled={isLoading}
+                  type="submit"
+                >
+                  Submit
+                  {isLoading && (
+                    <Loader size={12} className="ml-3 animate-spin" />
+                  )}
+                </Button>
+              )}
+              {currentStep > 0 && (
+                <Button
+                  variant={"secondary"}
+                  className="px-8 py-2"
+                  type="button"
+                  onClick={() => setCurrentStep(currentStep - 1)}
+                >
+                  Back
+                </Button>
+              )}
+          
+           
+            
+            </div>
+          </form>
+     
+        </FormPreviewComponent>
+
+  </section>
+
   );
 };
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+//ignore-prettier
 type AddressFieldProps = {
   field: ControllerRenderProps<
     {
@@ -1260,7 +1332,7 @@ const DatePickerView = ({
         <Button
           variant={"outline"}
           className={cn(
-            "w-[280px] justify-start text-left font-normal",
+            "max-w-[280px] w-full justify-start text-left font-normal",
             !fieldValue && "text-muted-foreground"
           )}
         >

@@ -86,3 +86,48 @@
       @apply bg-background text-foreground;
     }
   }
+
+  .quill-content h1 {
+    font-size: 2.25rem; /* 4xl */
+  }
+  
+  .quill-content h2 {
+    font-size: 1.875rem; /* 3xl */
+  }
+  
+  .quill-content h3 {
+    font-size: 1.5rem; /* 2xl */
+  }
+  
+  .quill-content h4 {
+    font-size: 1.25rem; /* xl */
+  }
+  
+  .quill-content h5 {
+    font-size: 1.125rem; /* lg */
+  }
+  
+  .quill-content h6 {
+    font-size: 1rem; /* base */
+  }
+  
+  .quill-content p,
+  .quill-content span {
+    font-size: 1rem; /* base */
+  }
+  
+  .quill-content small {
+    font-size: 0.875rem; /* sm */
+  }
+  
+  .ql-size-small {
+    font-size: 0.75rem !important; /* small */
+  }
+  
+   .ql-size-large {
+    font-size: 1.5rem !important; /* large */
+  }
+  
+  .ql-size-huge {
+    font-size: 4.25rem !important; /* huge */
+  }

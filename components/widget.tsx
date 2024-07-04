@@ -22,7 +22,7 @@ const Widget = ({ companySlug }: Props) => {
 
   
   return (
-    <div className="w-[98vw]  lg:min-w-[500px]   max-w-[600px]">
+    <div className="w-[98vw]  lg:min-w-[500px]   max-w-[500px]">
   
       <AnimatePresence>
         {open && (
@@ -30,11 +30,11 @@ const Widget = ({ companySlug }: Props) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className=" mb-3   w-full   z-[999]"
+            className=" mb-3   w-full   z-[999] h-[85vh]    overflow-y-auto flex flex-col"
           >
-            <article className="rounded-lg bg-black p-3 h-[85vh] sm:h-[80vh] md:h-[800px] max-h-[85vh]   overflow-y-auto">
+            <article className="rounded-lg bg-black p-3 flex flex-col  flex-1">
               {isLoading && (
-                <div className=" flex items-center justify-center h-full bg-white flex-col">
+                <div className=" flex items-center justify-center h-full bg-white flex-col     flex-1">
                   <Loader size={20} className="animate-spin block" />
                   <p className="mt-4 text-xl text-gray-400">Loading Data...</p>
                 </div>
@@ -47,7 +47,7 @@ const Widget = ({ companySlug }: Props) => {
                 </div>
               )}
               {company && (
-                <div className="bg-white rounded-md h-full">
+                <div className="bg-white rounded-md h-full flex flex-col  flex-1 overflow-y-hidden">
                  <WidgetContent/>
                 </div>
               )}
