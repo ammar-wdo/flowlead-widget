@@ -469,7 +469,7 @@ const LeftPart = ({
                   )}
                 </Button>
               )}
-              {JSON.stringify(formPreview.watch(),undefined,2)}
+            
             </div>
           </form>
         </section>
