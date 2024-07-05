@@ -84,7 +84,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
                 <article
                   onClick={() => setSelectedForm(form.id)}
                   key={form.id}
-                  className="border hover:border-gray-400 rounded-md p-3 cursor-pointer    transition  flex items-start justify-between"
+                  className="  hover:bg-muted rounded-md p-3 cursor-pointer    transition  flex items-start justify-between"
                 >
                   <div>
                   <h4 className="font-semibold text-muted-foreground">
@@ -457,10 +457,10 @@ const SelectedForm = ({
         >
          
           <div className="h-[95%]  overflow-y-auto noScroll  w-full flex flex-col    ">
-          {form.logo && <div className="w-full min-h-[200px] relative block bg-red-300">
-            <div  className="absolute inset-0 bg-black/20 z-10 backdrop-blur-sm"/>
+          {form.logo && <div className="w-full min-h-[250px]  relative block  ">
+            {/* <div  className="absolute inset-0 bg-black/20 z-10 backdrop-blur-sm"/> */}
 <Image src={form.logo} alt="logo" fill  className="object-cover"/>
-<Image src={form.logo} alt="logo" fill  className="object-contain z-20"/>
+{/* <Image src={form.logo} alt="logo" fill  className="object-contain z-20"/> */}
           </div>}
             <div className="mt-4">
               <h4 className="font-semibold px-3  ">{form.name}</h4>
@@ -685,13 +685,13 @@ const ServiceCheckBoxView = ({
   >;
 }) => {
   return (
-    <FormItem>
+    <FormItem className="space-y-0">
       <div
         id="quill-content-container"
         className="quill-content prose"
         dangerouslySetInnerHTML={{ __html: serviceElement.description || "" }}
       />
-      <div className="mb-4 grid grid-cols-1    gap-1">
+      <div className="mb-4 grid grid-cols-1    gap-4">
         {serviceElement.options.map((option, i) => (
           <FormItem
             key={option.id}
@@ -869,16 +869,16 @@ const ServiceRadioView = ({
   >;
 }) => {
   return (
-    <FormItem className="space-y-0">
-      <FormLabel className="flex flex-row items-center gap-1 space-y-0 mb-4">
+    <FormItem className="space-y-0 ">
+      {/* <FormLabel className="flex flex-row items-center gap-1 space-y-0 mb-4">
         <div
           id="quill-content-container"
           className="quill-content prose "
           dangerouslySetInnerHTML={{ __html: serviceElement.description || "" }}
         />
-      </FormLabel>
+      </FormLabel> */}
       <FormControl>
-        <FormItem className="grid grid-cols-1   gap-1 space-y-0">
+        <FormItem className="grid grid-cols-1   gap-4 space-y-0">
           {serviceElement.options.map((option, i) => (
             <div
               onClick={() =>{
@@ -1028,11 +1028,11 @@ const ServiceDropDownView = ({
 }) => {
   return (
     <div>
-      <div
+      {/* <div
         id="quill-content-container"
         className="quill-content prose"
         dangerouslySetInnerHTML={{ __html: serviceElement.description || "" }}
-      />
+      /> */}
       <Select
         onValueChange={(id: string) => {
           if (id === "NONE") {
@@ -1095,16 +1095,14 @@ const ServiceDropDownView = ({
       {formPreview.watch(`${serviceElement.name}-service`) && (
         <FormItem
           className={cn(
-            "grid grid-cols-2 gap-3 rounded-lg border bg-white p-4 mt-2 max-w-[400px]"
+            "grid grid-cols-2 gap-3 rounded-lg border bg-white p-4 mt-2 w-full h-[150px]"
           )}
         >
           <div className="flex flex-col gap-1 justify-between">
             <FormLabel className=" capitalize cursor-pointer ">
               {field.value.name}
             </FormLabel>
-            <p className="text-xs  font-light    line-clamp-4">
-              {field.value.description}
-            </p>
+           
             <div className="flex items-center justify-between">
               <p className="">${field.value.price}</p>
               {!!field.value?.id &&
@@ -1177,7 +1175,7 @@ const ServiceDropDownView = ({
           </div>
 
           <div className="flex items-center gap-1">
-            <div className="relative aspect-square rounded-lg overflow-hidden flex-1">
+            <div className="relative w-full h-full rounded-lg overflow-hidden flex-1">
               {!!serviceElement.options.find((el) => el.id === field.value?.id)
                 ?.image && (
                 <Image
