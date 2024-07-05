@@ -9,11 +9,15 @@
     widgetContainer.id = 'widget-container';
     document.body.appendChild(widgetContainer);
     widgetContainer.style.position = 'fixed';
-    widgetContainer.style.bottom = '1px';
-    widgetContainer.style.right = '1px';
-    widgetContainer.style.width = '100vw'; // or set a specific width if needed
-    widgetContainer.style.height = '100vh'; // or set a specific height if needed
+    widgetContainer.style.bottom = '10px';
+    widgetContainer.style.right = '10px';
+    widgetContainer.style.width = '400px'; // Set a specific width
+    widgetContainer.style.height = '100vh'; // Set a specific height
     widgetContainer.style.zIndex = '1000'; // Ensure it appears above other content
+ 
+    widgetContainer.style.backgroundColor = 'transparent'
+ 
+ 
 
     // Create an iframe to load the widget content
     const iframe = document.createElement('iframe');

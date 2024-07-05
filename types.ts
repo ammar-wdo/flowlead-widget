@@ -222,6 +222,7 @@ const formSchema = z.object({
     name: z.string(),
     description: z.string().optional(),
     slug: z.string(),
+    logo:optionalString,
   
     isPublished: z.boolean().default(false),
     isWidjet: z.boolean().default(false),

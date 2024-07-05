@@ -62,7 +62,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -30 }}
-          className="flex flex-col flex-1 mt-2"
+          className="flex flex-col flex-1 "
         >
           <SelectedForm
             form={form}
@@ -84,8 +84,9 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
                 <article
                   onClick={() => setSelectedForm(form.id)}
                   key={form.id}
-                  className="border hover:border-gray-400 rounded-md p-3 cursor-pointer   transition "
+                  className="border hover:border-gray-400 rounded-md p-3 cursor-pointer    transition  flex items-start justify-between"
                 >
+                  <div>
                   <h4 className="font-semibold text-muted-foreground">
                     {form.name}
                   </h4>
@@ -96,6 +97,11 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
                       dangerouslySetInnerHTML={{ __html: form.description }}
                     />
                   )}
+                  </div>
+                  <div className="relative w-[150px] h-[100px] rounded-xl overflow-hidden ">
+                    {form.logo && <Image alt="logo"  src={form.logo} fill  className="object-cover"/>}
+                  </div>
+                
                 </article>
               ))}
             </motion.section>
@@ -105,7 +111,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
-              className="mt-2"
+              className=" "
             >
               <SelectedForm
                 form={forms.find((el) => el.id === selectedForm)!}
@@ -449,13 +455,19 @@ const SelectedForm = ({
           onSubmit={formPreview.handleSubmit(onSubmit)}
           className="flex flex-col gap-4          w-full   h-[calc(85vh-45px)] relative   "
         >
-          <div className="h-[95%]  overflow-y-auto noScroll  w-full flex flex-col gap-8    px-3 ">
-            <div>
-              <h4 className="font-semibold  ">{form.name}</h4>
+         
+          <div className="h-[95%]  overflow-y-auto noScroll  w-full flex flex-col    ">
+          {form.logo && <div className="w-full min-h-[200px] relative block bg-red-300">
+            <div  className="absolute inset-0 bg-black/20 z-10 backdrop-blur-sm"/>
+<Image src={form.logo} alt="logo" fill  className="object-cover"/>
+<Image src={form.logo} alt="logo" fill  className="object-contain z-20"/>
+          </div>}
+            <div className="mt-4">
+              <h4 className="font-semibold px-3  ">{form.name}</h4>
 
               {form.description && (
                 <p
-                  className=" "
+                  className=" px-3 "
                   dangerouslySetInnerHTML={{ __html: form.description }}
                 />
               )}
@@ -463,7 +475,7 @@ const SelectedForm = ({
 
             {steps[currentStep].map((element) => (
               <motion.div
-                className=""
+                className="px-3 mt-8"
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 key={`motion-${element.id}`}
