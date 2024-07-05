@@ -453,10 +453,10 @@ const SelectedForm = ({
       <FormPreviewComponent {...formPreview}>
         <form
           onSubmit={formPreview.handleSubmit(onSubmit)}
-          className="flex flex-col gap-4          w-full   h-[calc(85vh-45px)] relative   "
+          className="flex flex-col gap-4          w-full   h-[85vh] sm:h-[89vh] relative   "
         >
          
-          <div className="h-[95%]  overflow-y-auto noScroll  w-full flex flex-col    ">
+          <div className="  overflow-y-auto noScroll  w-full flex flex-col     flex-1 ">
           {form.logo && <div className="w-full min-h-[250px]  relative block  ">
             {/* <div  className="absolute inset-0 bg-black/20 z-10 backdrop-blur-sm"/> */}
 <Image src={form.logo} alt="logo" fill  className="object-cover"/>
@@ -485,7 +485,7 @@ const SelectedForm = ({
             ))}
           </div>
 
-          <div className="flex flex-col gap-1 mt-auto w-full justify-end  pt-3 border-t px-3">
+          <div className="flex flex-col gap-1   pt-3 border-t px-3 ">
             {currentStep < steps.length - 1 && (
               <Button
                 className="px-8  w-full ml-auto bg-second py-6 hover:bg-second/80"

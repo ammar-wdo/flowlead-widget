@@ -14,7 +14,7 @@ type Props = {
   companySlug: string;
 };
 
-const Widget = ({ companySlug }: Props) => {
+export const Widget = ({ companySlug }: Props) => {
   const searchParams = useSearchParams();
   const [open, setOpen] = useState(
     !!(searchParams.get("openWidget") === "true")
@@ -33,9 +33,9 @@ const Widget = ({ companySlug }: Props) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className=" mb-3     z-[999] h-[90vh] fixed bottom-1 sm:bottom-3 right-px sm:right-3 w-[98vw]    max-w-[400px]   2xl:max-w-[500px] overflow-y-auto noScroll flex flex-col"
+            className=" mb-3   rounded-3xl bg-second p-1 sm:p-2   flex-1  z-[999] h-[95vh] fixed bottom-px sm:bottom-3 right-px sm:right-3 w-[98vw]    max-w-[400px]   2xl:max-w-[500px] overflow-y-auto noScroll flex flex-col"
           >
-            <article className="rounded-3xl bg-second p-1 sm:p-2 flex flex-col  flex-1">
+           
               {isLoading && (
                 <div className=" flex items-center justify-center h-full bg-white flex-col     flex-1">
                   <Loader size={20} className="animate-spin block" />
@@ -76,7 +76,7 @@ const Widget = ({ companySlug }: Props) => {
                   />
                 </div>
               )}
-            </article>
+        
           </Motion>
         )}
       </AnimatePresence>
