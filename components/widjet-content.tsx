@@ -3,12 +3,34 @@ import { cn, isFieldVisible } from "@/lib/utils";
 import { Company, Element, Form, Service } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, CalendarIcon, CheckCircle, Circle, Loader, Square, SquareCheckBig } from "lucide-react";
+import {
+  ArrowLeft,
+  CalendarIcon,
+  CheckCircle,
+  Circle,
+  Loader,
+  Square,
+  SquareCheckBig,
+} from "lucide-react";
 import React, { useState } from "react";
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,Form as FormPreviewComponent } from "./ui/form";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Form as FormPreviewComponent,
+} from "./ui/form";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import Image from "next/image";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
@@ -17,82 +39,98 @@ import { Button } from "./ui/button";
 import { format } from "date-fns";
 import { Calendar } from "./ui/calendar";
 
-type Props = {};
+type Props = {
+  selectedForm: string | undefined;
+  setSelectedForm: React.Dispatch<React.SetStateAction<string | undefined>>;
+};
 
-const WidgetContent = (props: Props) => {
+const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
   const queryClient = useQueryClient();
   const company = queryClient.getQueryData(["widget"]) as Company & {
     forms: Form[];
   };
-  const [selectedForm, setSelectedForm] = useState<string | undefined>(
-    undefined
-  );
+
   const forms = company.forms;
   const oneForm = forms.length === 1;
   const form = forms[0];
   return (
-    <div className="p-3 flex flex-col flex-1">
-        <div className="flex items-center gap-3">
-            {selectedForm ? <button onClick={()=>setSelectedForm(undefined)} className="h-8 w-8 p-1 flex items-center justify-center rounded-full hover:bg-gray-100 transition"><ArrowLeft/></button>:<span className="h-8 w-8 p-1"/>}
-        <h3 className="font-bold">{company.name}</h3>
-        </div>
-   
+    <div className=" pb-3 flex flex-col flex-1  ">
       {/* one form */}
-    
-        {oneForm ? (
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            className="flex flex-col flex-1"
-          >
-            <SelectedForm form={form} companyEmail={company.companyEmail} companyname={company.name} />
-          </motion.div>
-        ) :   <AnimatePresence mode="wait">{ !selectedForm ? (
-          <motion.section
-          key={'form-list'}
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            className="flex flex-col gap-2 mt-3"
-          >
-            {forms.map((form) => (
-              <article
-                onClick={() => setSelectedForm(form.id)}
-                key={form.id}
-                className="border hover:border-gray-400 rounded-md p-3 cursor-pointer   transition "
-              >
-                <h4 className="font-semibold text-muted-foreground">
-                  {form.name}
-                </h4>
-                {form.description && (
-                  <p
-                    className="text-xs text-gray-400"
-                    dangerouslySetInnerHTML={{ __html: form.description }}
-                  />
-                )}
-              </article>
-            ))}
-          </motion.section>
-        ) : (
-          <motion.div
-          key={'selected-form'}
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-          >
-            <SelectedForm form={forms.find((el) => el.id === selectedForm)!}  companyEmail={company.companyEmail} companyname={company.name}  />
-          </motion.div>
-        )}</AnimatePresence>}
-  
+
+      {oneForm ? (
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -30 }}
+          className="flex flex-col flex-1"
+        >
+          <SelectedForm
+            form={form}
+            companyEmail={company.companyEmail}
+            companyname={company.name}
+          />
+        </motion.div>
+      ) : (
+        <AnimatePresence mode="wait">
+          {!selectedForm ? (
+            <motion.section
+              key={"form-list"}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              className="flex flex-col gap-2 px-3"
+            >
+              {forms.map((form) => (
+                <article
+                  onClick={() => setSelectedForm(form.id)}
+                  key={form.id}
+                  className="border hover:border-gray-400 rounded-md p-3 cursor-pointer   transition "
+                >
+                  <h4 className="font-semibold text-muted-foreground">
+                    {form.name}
+                  </h4>
+
+                  {form.description && (
+                    <p
+                      className="text-xs text-gray-400"
+                      dangerouslySetInnerHTML={{ __html: form.description }}
+                    />
+                  )}
+                </article>
+              ))}
+            </motion.section>
+          ) : (
+            <motion.div
+              key={"selected-form"}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              className=""
+            >
+              <SelectedForm
+                form={forms.find((el) => el.id === selectedForm)!}
+                companyEmail={company.companyEmail}
+                companyname={company.name}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
     </div>
   );
 };
 
 export default WidgetContent;
 
-const SelectedForm = ({ form ,companyname,companyEmail}: { form: Form ,companyname:string,companyEmail:string}) => {
-
+const SelectedForm = ({
+  form,
+  companyname,
+  companyEmail,
+}: {
+  form: Form;
+  companyname: string;
+  companyEmail: string;
+}) => {
   const {
     formPreview,
     onSubmit,
@@ -101,7 +139,10 @@ const SelectedForm = ({ form ,companyname,companyEmail}: { form: Form ,companyna
     labels,
     setCurrentStep,
     steps,
-  } = useFormPreview({...form,company:{name:companyname,companyEmail:companyEmail}});
+  } = useFormPreview({
+    ...form,
+    company: { name: companyname, companyEmail: companyEmail },
+  });
   const isLoading = formPreview.formState.isSubmitting;
   const formValues = formPreview.watch();
   const renderElement = (element: Element) => {
@@ -402,85 +443,74 @@ const SelectedForm = ({ form ,companyname,companyEmail}: { form: Form ,companyna
   };
 
   return (
-    <section className="mt-4 flex flex-col flex-1 justify-between">
-    <h4 className="font-semibold">{form.name}</h4>
-    {form.description && <p className="" dangerouslySetInnerHTML={{ __html: form.description }} />}
- 
-    <FormPreviewComponent {...formPreview}> 
-  
-        
-          <form
-            onSubmit={formPreview.handleSubmit(onSubmit)}
-            className="flex flex-col gap-4       pt-4  w-full   h-[calc(85vh-145px)] relative   "
-          >
-              {steps?.length > 1 && (
-            <StepsIndicator steps={steps.length} currentStep={currentStep} />
-          )}
-            <div className="h-[95%]  overflow-y-auto px-3 w-full flex flex-col gap-8  mt-2   ">
-          
-            {steps[currentStep].map((element) => <motion.div className="" initial={{x:-20,opacity:0}} animate={{x:0 ,opacity:1}} key={`motion-${element.id}`}>{renderElement(element)}</motion.div>)}
-            </div>
-           
+    <section className="  flex flex-col flex-1 justify-between">
+      <FormPreviewComponent {...formPreview}>
+        <form
+          onSubmit={formPreview.handleSubmit(onSubmit)}
+          className="flex flex-col gap-4       pt-4  w-full   h-[calc(85vh-50px)] relative   "
+        >
+          <div className="h-[95%]  overflow-y-auto noScroll  w-full flex flex-col gap-8  mt-2  px-3 ">
+            <div>
+              <h4 className="font-semibold  ">{form.name}</h4>
 
-            <div className="flex flex-col gap-1 mt-auto w-full justify-end  ">
+              {form.description && (
+                <p
+                  className=" "
+                  dangerouslySetInnerHTML={{ __html: form.description }}
+                />
+              )}
+            </div>
+
+            {steps[currentStep].map((element) => (
+              <motion.div
+                className=""
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                key={`motion-${element.id}`}
+              >
+                {renderElement(element)}
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="flex flex-col gap-1 mt-auto w-full justify-end  pt-3 border-t px-3">
             {currentStep < steps.length - 1 && (
-                <Button
-                  className="px-8 py-2 w-full ml-auto bg-second hover:bg-second/80"
-                  type="button"
-                  onClick={handleNext}
-                >
-                  {labels[currentStep] || "Next"}
-                </Button>
-              )}
-                 {currentStep === steps.length - 1 && (
-                <Button
-                  className="px-8 py-2 bg-second w-full hover:bg-second/80"
-                  disabled={isLoading}
-                  type="submit"
-                >
-                  Submit
-                  {isLoading && (
-                    <Loader size={12} className="ml-3 animate-spin" />
-                  )}
-                </Button>
-              )}
-              {currentStep > 0 && (
-                <Button
-                  variant={"secondary"}
-                  className="px-8 py-2"
-                  type="button"
-                  onClick={() => setCurrentStep(currentStep - 1)}
-                >
-                  Back
-                </Button>
-              )}
-          
-           
-            
-            </div>
-          </form>
-     
-        </FormPreviewComponent>
-
-  </section>
-
+              <Button
+                className="px-8  w-full ml-auto bg-second py-6 hover:bg-second/80"
+                type="button"
+                onClick={handleNext}
+              >
+                {labels[currentStep] || "Next"}
+              </Button>
+            )}
+            {currentStep === steps.length - 1 && (
+              <Button
+                className="px-8  bg-second w-full  py-6 hover:bg-second/80"
+                disabled={isLoading}
+                type="submit"
+              >
+                Submit
+                {isLoading && (
+                  <Loader size={12} className="ml-3 animate-spin" />
+                )}
+              </Button>
+            )}
+            {currentStep > 0 && (
+              <Button
+                variant={"secondary"}
+                className="px-8 py-6"
+                type="button"
+                onClick={() => setCurrentStep(currentStep - 1)}
+              >
+                Back
+              </Button>
+            )}
+          </div>
+        </form>
+      </FormPreviewComponent>
+    </section>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //ignore-prettier
 type AddressFieldProps = {
@@ -667,7 +697,7 @@ const ServiceCheckBoxView = ({
                       quantity: 1,
                       serviceName: serviceElement.name,
                       serviceId: serviceElement.id,
-                      taxPercentage:serviceElement.taxPercentage
+                      taxPercentage: serviceElement.taxPercentage,
                     },
                   ])
                 : field.onChange(
@@ -847,7 +877,7 @@ const ServiceRadioView = ({
                   quantity: 1,
                   serviceName: serviceElement.name,
                   serviceId: serviceElement.id,
-                  taxPercentage:serviceElement.taxPercentage
+                  taxPercentage: serviceElement.taxPercentage,
                 })
               }
               key={option.id}
@@ -1003,7 +1033,7 @@ const ServiceDropDownView = ({
             quantity: 1,
             serviceName: serviceElement.name,
             serviceId: serviceElement.id,
-            taxPercentage:serviceElement.taxPercentage
+            taxPercentage: serviceElement.taxPercentage,
           });
         }}
         defaultValue={field.value}
@@ -1203,7 +1233,7 @@ const ServiceSinglepriceView = ({
                 quantity: 1,
                 serviceName: serviceElement.name,
                 serviceId: serviceElement.id,
-                taxPercentage:serviceElement.taxPercentage
+                taxPercentage: serviceElement.taxPercentage,
               })
             : field.onChange(undefined);
         }}

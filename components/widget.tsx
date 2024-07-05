@@ -5,34 +5,37 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useWidget } from "../hooks/widget-info";
 import Motion from "./motion";
-import { ChevronDown, Loader } from "lucide-react";
+import { ArrowLeft, ChevronDown, Loader, XIcon } from "lucide-react";
 import WidgetContent from "./widjet-content";
 import { useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 type Props = {
   companySlug: string;
-
 };
 
 const Widget = ({ companySlug }: Props) => {
-
-  const searchParams = useSearchParams()
-  const [open, setOpen] = useState(!!(searchParams.get('openWidget')==="true"));
+  const searchParams = useSearchParams();
+  const [open, setOpen] = useState(
+    !!(searchParams.get("openWidget") === "true")
+  );
   const { data: company, isLoading, isError, error } = useWidget(companySlug);
+  console.log("company", company);
+  const [selectedForm, setSelectedForm] = useState<string | undefined>(
+    undefined
+  );
 
-  
   return (
-    <div className="w-[98vw]  lg:min-w-[500px]   max-w-[500px]">
-  
+    <div className="">
       <AnimatePresence>
         {open && (
           <Motion
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className=" mb-3   w-full   z-[999] h-[85vh]    overflow-y-auto flex flex-col"
+            className=" mb-3     z-[999] h-[88vh] fixed bottom-3 right-px sm:right-3 w-[98vw]    max-w-[400px]   2xl:max-w-[500px] overflow-y-auto noScroll flex flex-col"
           >
-            <article className="rounded-lg bg-black p-3 flex flex-col  flex-1">
+            <article className="rounded-3xl bg-second p-1 sm:p-2 flex flex-col  flex-1">
               {isLoading && (
                 <div className=" flex items-center justify-center h-full bg-white flex-col     flex-1">
                   <Loader size={20} className="animate-spin block" />
@@ -47,8 +50,30 @@ const Widget = ({ companySlug }: Props) => {
                 </div>
               )}
               {company && (
-                <div className="bg-white rounded-md h-full flex flex-col  flex-1 overflow-y-hidden">
-                 <WidgetContent/>
+                <div className="bg-white rounded-3xl sm:rounded-2xl h-full flex flex-col  flex-1 overflow-y-hidden relative ">
+                  <div className="flex items-center justify-between p-3">
+                  { selectedForm ?  <button
+                      type="button"
+                      title="back"
+                      onClick={() => setSelectedForm(undefined)}
+                      className="flex  items-center justify-center   gap-2   "
+                    >
+                     <span className="w-8 h-8 rounded-full bg-white items-center justify-center  flex hover:bg-muted transition"><ArrowLeft /> </span> <span>Go Back</span>
+                    </button> : <span/>}
+                    <button
+                      type="button"
+                      title="close"
+                      onClick={() => {setOpen(false);setSelectedForm(undefined)}}
+                      className="flex  items-center justify-center w-8 h-8   rounded-full bg-white hover:bg-muted transition"
+                    >
+                      <XIcon />
+                    </button>
+                  </div>
+
+                  <WidgetContent
+                    selectedForm={selectedForm}
+                    setSelectedForm={setSelectedForm}
+                  />
                 </div>
               )}
             </article>
@@ -58,10 +83,15 @@ const Widget = ({ companySlug }: Props) => {
       <button
         onClick={() => setOpen((prev) => !prev)}
         type="button"
-        className="p-1 border-transparent  border-2 rounded-md  w-fit py-4 px-8 bg-black flex items-center ml-auto  text-white hover:bg-black/80 transition font-semibold "
+        className={cn(
+          "p-1 border-transparent  border-2 rounded-md  w-fit py-2 px-8 bg-second flex items-center ml-auto fixed bottom-3 right-3 text-white hover:bg-second/80 transition font-semibold ",
+          open && "opacity-0 pointer-events-none"
+        )}
       >
         Widget
-        <ChevronDown className={open ? "rotate-180 transition ml-3" :"transition ml-3"} />
+        <ChevronDown
+          className={open ? "rotate-180 transition ml-3" : "transition ml-3"}
+        />
       </button>
     </div>
   );

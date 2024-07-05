@@ -131,3 +131,7 @@
   .ql-size-huge {
     font-size: 4.25rem !important; /* huge */
   }
+
+  .noScroll::-webkit-scrollbar {
+    display: none;
+  }
