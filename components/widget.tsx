@@ -33,7 +33,7 @@ const Widget = ({ companySlug }: Props) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className=" mb-3     z-[999] h-[88vh] fixed bottom-3 right-px sm:right-3 w-[98vw]    max-w-[400px]   2xl:max-w-[500px] overflow-y-auto noScroll flex flex-col"
+            className=" mb-3     z-[999] h-[90vh] fixed bottom-1 sm:bottom-3 right-px sm:right-3 w-[98vw]    max-w-[400px]   2xl:max-w-[500px] overflow-y-auto noScroll flex flex-col"
           >
             <article className="rounded-3xl bg-second p-1 sm:p-2 flex flex-col  flex-1">
               {isLoading && (
@@ -51,7 +51,7 @@ const Widget = ({ companySlug }: Props) => {
               )}
               {company && (
                 <div className="bg-white rounded-3xl sm:rounded-2xl h-full flex flex-col  flex-1 overflow-y-hidden relative ">
-                  <div className="flex items-center justify-between p-3">
+                  <div className="flex items-center justify-between p-3 pb-1 border-b">
                   { selectedForm ?  <button
                       type="button"
                       title="back"

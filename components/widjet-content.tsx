@@ -62,7 +62,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -30 }}
-          className="flex flex-col flex-1"
+          className="flex flex-col flex-1 mt-2"
         >
           <SelectedForm
             form={form}
@@ -78,7 +78,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
-              className="flex flex-col gap-2 px-3"
+              className="flex flex-col gap-2 px-3 mt-4"
             >
               {forms.map((form) => (
                 <article
@@ -105,7 +105,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
-              className=""
+              className="mt-2"
             >
               <SelectedForm
                 form={forms.find((el) => el.id === selectedForm)!}
@@ -447,9 +447,9 @@ const SelectedForm = ({
       <FormPreviewComponent {...formPreview}>
         <form
           onSubmit={formPreview.handleSubmit(onSubmit)}
-          className="flex flex-col gap-4       pt-4  w-full   h-[calc(85vh-50px)] relative   "
+          className="flex flex-col gap-4          w-full   h-[calc(85vh-45px)] relative   "
         >
-          <div className="h-[95%]  overflow-y-auto noScroll  w-full flex flex-col gap-8  mt-2  px-3 ">
+          <div className="h-[95%]  overflow-y-auto noScroll  w-full flex flex-col gap-8    px-3 ">
             <div>
               <h4 className="font-semibold  ">{form.name}</h4>
 
@@ -679,12 +679,12 @@ const ServiceCheckBoxView = ({
         className="quill-content prose"
         dangerouslySetInnerHTML={{ __html: serviceElement.description || "" }}
       />
-      <div className="mb-4 grid grid-cols-1 md:grid-cols-2   gap-1">
+      <div className="mb-4 grid grid-cols-1    gap-1">
         {serviceElement.options.map((option, i) => (
           <FormItem
             key={option.id}
             className={cn(
-              "grid grid-cols-2 gap-3 rounded-lg border bg-white p-4 ",
+              "grid grid-cols-2 gap-3 h-[150px] rounded-lg border bg-white p-3 space-y-0 ",
               !!(fieldValue || []).some((el: any) => el.id === option.id) &&
                 "border-second"
             )}
@@ -709,9 +709,7 @@ const ServiceCheckBoxView = ({
               <FormLabel className=" capitalize cursor-pointer ">
                 {option.name}
               </FormLabel>
-              <p className="text-xs  font-light    line-clamp-4">
-                {option.description}
-              </p>
+             
               <div className="flex items-center justify-between">
                 <p className="">${option.price}</p>
                 {!!option.enableQuantity &&
@@ -810,8 +808,8 @@ const ServiceCheckBoxView = ({
               </div>
             </div>
 
-            <div className="flex items-center gap-1">
-              <div className="relative aspect-square rounded-lg overflow-hidden flex-1">
+            <div className="flex items-center gap-1 space-y-0">
+              <div className="relative w-full h-full rounded-lg overflow-hidden flex-1">
                 {option.image && (
                   <Image
                     src={option.image}
@@ -860,29 +858,33 @@ const ServiceRadioView = ({
 }) => {
   return (
     <FormItem className="space-y-0">
-      <FormLabel className="flex flex-row items-center gap-1 space-y-0">
+      <FormLabel className="flex flex-row items-center gap-1 space-y-0 mb-4">
         <div
           id="quill-content-container"
-          className="quill-content prose"
+          className="quill-content prose "
           dangerouslySetInnerHTML={{ __html: serviceElement.description || "" }}
         />
       </FormLabel>
       <FormControl>
-        <FormItem className="grid grid-cols-1 lg:grid-cols-2 gap-1 space-y-0 ">
+        <FormItem className="grid grid-cols-1   gap-1 space-y-0">
           {serviceElement.options.map((option, i) => (
             <div
-              onClick={() =>
+              onClick={() =>{
+                !!(field.value?.id === option.id) ?
+                field.onChange(undefined)
+                :
+                
                 field.onChange({
                   ...option,
                   quantity: 1,
                   serviceName: serviceElement.name,
                   serviceId: serviceElement.id,
                   taxPercentage: serviceElement.taxPercentage,
-                })
+                })}
               }
               key={option.id}
               className={cn(
-                "grid grid-cols-2 gap-3 bg-white p-4 rounded-md border",
+                "grid grid-cols-2 gap-3 bg-white p-4 rounded-md border  h-[150px]",
                 field.value?.id === option.id && "border-second"
               )}
             >
@@ -893,9 +895,7 @@ const ServiceRadioView = ({
                 >
                   {option.name}
                 </FormLabel>
-                <p className="text-xs  font-light  text-[#6B778C]  line-clamp-4">
-                  {option.description}
-                </p>
+              
                 <div className="flex items-center justify-between">
                   <p className="">${option.price}</p>
                   {!!option.enableQuantity && field.value?.id === option.id ? (
@@ -966,7 +966,7 @@ const ServiceRadioView = ({
                 </div>
               </div>
               <div className="flex items-center gap-1">
-                <div className="flex-1 aspect-square relative rounded-lg overflow-hidden">
+                <div className="flex-1 w-full  relative rounded-lg overflow-hidden">
                   {option.image && (
                     <Image
                       src={option.image}

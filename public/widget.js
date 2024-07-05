@@ -17,7 +17,7 @@
 
     // Create an iframe to load the widget content
     const iframe = document.createElement('iframe');
-    iframe.src = `http://localhost:3001/${companySlug}/widget`;
+    iframe.src = `https://flowlead-widget.vercel.app/widget.js/${companySlug}/widget`;
     iframe.style.width = '100%';
     iframe.style.height = '100%';
     iframe.style.border = 'none';
