@@ -11,7 +11,7 @@
     widgetContainer.style.position = 'fixed';
     widgetContainer.style.bottom = '10px';
     widgetContainer.style.right = '10px';
-    widgetContainer.style.width = '400px'; // Set a specific width
+    widgetContainer.style.width = '600px'; // Set a specific width
     widgetContainer.style.height = '100vh'; // Set a specific height
     widgetContainer.style.zIndex = '1000'; // Ensure it appears above other content
  
