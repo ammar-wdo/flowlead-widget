@@ -54,7 +54,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
   const oneForm = forms.length === 1;
   const form = forms[0];
   return (
-    <div className=" pb-3 flex flex-col flex-1  ">
+    <div className=" pb-3    ">
       {/* one form */}
 
       {oneForm ? (
@@ -62,7 +62,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -30 }}
-          className="flex flex-col flex-1 "
+          className=" "
         >
           <SelectedForm
             form={form}
@@ -78,7 +78,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
-              className="flex flex-col gap-2 px-3 mt-4"
+              className="flex flex-col gap-2 px-3 mt-4 b  h-[calc(98vh-24px)] overflow-y-auto"
             >
               {forms.map((form) => (
                 <article
@@ -449,14 +449,14 @@ const SelectedForm = ({
   };
 
   return (
-    <section className="  flex flex-col flex-1 justify-between">
+    <section className=" relative">
       <FormPreviewComponent {...formPreview}>
         <form
           onSubmit={formPreview.handleSubmit(onSubmit)}
-          className="flex flex-col gap-4          w-full   h-[85vh] sm:h-[89vh] relative   "
+          className="flex flex-col gap-4      pb-24  overflow-y-auto  w-full h-[calc(98vh-70px)] noScroll  sm:h-[calc(98vh-80px)]  "
         >
          
-          <div className="  overflow-y-auto noScroll  w-full flex flex-col     flex-1 ">
+          
           {form.logo && <div className="w-full min-h-[250px]  relative block  ">
             {/* <div  className="absolute inset-0 bg-black/20 z-10 backdrop-blur-sm"/> */}
 <Image src={form.logo} alt="logo" fill  className="object-cover"/>
@@ -483,9 +483,9 @@ const SelectedForm = ({
                 {renderElement(element)}
               </motion.div>
             ))}
-          </div>
+         
 
-          <div className="flex flex-col gap-1   pt-3 border-t px-3 ">
+          <div className="flex flex-col gap-1 z-10 py-3 bg-white  pb-4 sm:pb-3  border-t px-3 absolute bottom-0 left-0 w-full">
             {currentStep < steps.length - 1 && (
               <Button
                 className="px-8  w-full ml-auto bg-second py-6 hover:bg-second/80"
