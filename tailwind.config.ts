@@ -18,10 +18,11 @@ const config = {
   
       },
     },
-    screens :{
-      'h-lg': {'raw': '(min-height: 1000px)'}
-    },
+   
     extend: {
+      screens :{
+        'h-lg': {'raw': '(min-height: 1000px)'}
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

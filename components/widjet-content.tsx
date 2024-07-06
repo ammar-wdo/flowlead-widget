@@ -456,7 +456,7 @@ const SelectedForm = ({
       <FormPreviewComponent {...formPreview}>
         <form
           onSubmit={formPreview.handleSubmit(onSubmit)}
-          className="flex flex-col gap-4      pb-24  overflow-y-auto  w-full h-[calc(98vh-70px)] noScroll  sm:h-[calc(98vh-80px)]  "
+          className="flex flex-col gap-4      pb-24  overflow-y-auto  w-full h-[calc(85vh-50px)] noScroll  sm:h-[calc(85vh-50px)]  "
         >
          
           
@@ -488,7 +488,7 @@ const SelectedForm = ({
             ))}
          
 
-          <div className="flex flex-col gap-1 z-10 py-3 bg-white  pb-4 sm:pb-3 h-lg:pb-8   border-t px-3 absolute bottom-0 left-0 w-full">
+          <div className="flex flex-col gap-1 z-10 py-3 bg-white  pb-4 sm:pb-3    border-t px-3 absolute bottom-0 left-0 w-full">
             {currentStep < steps.length - 1 && (
               <Button
                 className="px-8  w-full ml-auto bg-second py-6 hover:bg-second/80"
