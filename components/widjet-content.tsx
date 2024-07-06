@@ -80,11 +80,12 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
               exit={{ opacity: 0, x: -30 }}
               className="flex flex-col gap-2 px-3 mt-4 b  h-[calc(98vh-24px)] overflow-y-auto"
             >
-              {forms.map((form) => (
+              {forms.map((form,i) => (
+                <div     key={form.id}>
                 <article
                   onClick={() => setSelectedForm(form.id)}
-                  key={form.id}
-                  className="  hover:bg-muted rounded-md p-3 cursor-pointer    transition  flex items-start justify-between"
+              
+                  className="  hover:bg-muted rounded-md p-3 cursor-pointer  gap-2  transition  flex items-start justify-between"
                 >
                   <div>
                   <h4 className="font-semibold text-muted-foreground">
@@ -93,16 +94,18 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
 
                   {form.description && (
                     <p
-                      className="text-xs text-gray-400"
+                      className="text-xs text-gray-400 line-clamp-4"
                       dangerouslySetInnerHTML={{ __html: form.description }}
                     />
                   )}
                   </div>
-                  <div className="relative w-[150px] h-[100px] rounded-xl overflow-hidden ">
+                  <div className="relative w-[150px] h-[100px] rounded-xl overflow-hidden shrink-0">
                     {form.logo && <Image alt="logo"  src={form.logo} fill  className="object-cover"/>}
                   </div>
                 
                 </article>
+                {(i< forms.length-1) && <div className="h-px w-full my-3 bg-gray-200"/>}
+                </div>
               ))}
             </motion.section>
           ) : (
@@ -978,12 +981,12 @@ const ServiceRadioView = ({
                 </div>
               </div>
               <div className="flex items-center gap-1">
-                <div className="flex-1 w-full  relative rounded-lg overflow-hidden">
+                <div className="flex-1 w-full h-full relative rounded-lg overflow-hidden">
                   {option.image && (
                     <Image
                       src={option.image}
                       fill
-                      className="objeccover"
+                      className="object-cover"
                       alt={option.name}
                     />
                   )}
