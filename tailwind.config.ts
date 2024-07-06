@@ -15,7 +15,11 @@ const config = {
       padding: "2rem",
       screens: {
         "2xl": "1400px",
+  
       },
+    },
+    screens :{
+      'h-lg': {'raw': '(min-height: 1000px)'}
     },
     extend: {
       colors: {
