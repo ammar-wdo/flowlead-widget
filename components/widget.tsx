@@ -120,6 +120,7 @@ export const Widget = ({ companySlug }: Props) => {
                   ) : (
                     <Motion
                     key={'content'}
+                    className=""
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
