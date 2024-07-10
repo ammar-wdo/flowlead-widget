@@ -9,6 +9,7 @@ import { ArrowLeft, ChevronDown, Loader, XIcon } from "lucide-react";
 import WidgetContent from "./widjet-content";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useOpenSuccess } from "@/contexts/success-context";
 
 type Props = {
   companySlug: string;
@@ -24,6 +25,8 @@ export const Widget = ({ companySlug }: Props) => {
   const [selectedForm, setSelectedForm] = useState<string | undefined>(
     undefined
   );
+
+  const {open:openSuccess,setOpen:setOpenSuccess} = useOpenSuccess()
 
   if(!company) return null
 
@@ -74,10 +77,25 @@ export const Widget = ({ companySlug }: Props) => {
                     </button>
                   </div>
 
-                  <WidgetContent
+                {openSuccess ? <Motion
+                   initial={{ opacity: 0, y: 20 }}
+                   animate={{ opacity: 1, y: 0 }}
+                   exit={{ opacity: 0, y: 20 }}
+                className="h-[calc(98vh-50px)] flex items-center flex-col justify-center">
+                  {company.widgetSettings.thankyouText}
+                  <button
+                  onClick={()=>{setOpenSuccess(false);setSelectedForm(undefined)}}
+                  className= "p-1 border-transparent  border-2 rounded-md hover:opacity-90 transition  justify-center  flex items-center ml-auto fixed bottom-0 right-0 w-[150px] h-[50px] text-sm text-white     font-semibold "
+                    style={{backgroundColor:company.widgetSettings.color}}
+                  >Close</button>
+                </Motion> :  <Motion
+                     initial={{ opacity: 0, y: 20 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     exit={{ opacity: 0, y: 20 }}
+                ><WidgetContent
                     selectedForm={selectedForm}
                     setSelectedForm={setSelectedForm}
-                  />
+                  /></Motion>}
                 </div>
               )}
         

@@ -11,8 +11,10 @@ import { toast } from "sonner";
 
 import { FormWithCompany } from "@/types";
 import axios from "axios";
+import { useOpenSuccess } from "@/contexts/success-context";
 
 export const useFormPreview = (form: FormWithCompany) => {
+  const {setOpen} = useOpenSuccess()
   const [schema, setSchema] = useState(
     generateZodSchema(form.elements, form.rules, {})
   );
@@ -91,6 +93,7 @@ export const useFormPreview = (form: FormWithCompany) => {
       if (!data.success) return toast.error(data.error);
 
       toast.success(data.message);
+      setOpen(true)
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong");
