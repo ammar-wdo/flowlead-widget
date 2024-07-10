@@ -35,7 +35,7 @@ export const Widget = ({ companySlug }: Props) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="     rounded-3xl bg-second p-1 sm:p-2   flex-1  z-[999]  fixed bottom-0   right-0   w-full   2xl:max-w-[500px] overflow-y-auto noScroll  "
+            className="     rounded-3xl bg-second p-1 sm:p-2   flex-1  z-[999]  fixed bottom-0   right-0   w-[79%]    overflow-y-auto noScroll  "
           >
            
               {isLoading && (
