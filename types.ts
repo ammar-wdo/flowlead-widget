@@ -246,3 +246,9 @@ const formSchema = z.object({
   export type Element = z.infer<typeof elementSchema>
   export type FieldType = typeof fieldTypeConst[number]
   export type Service = z.infer<typeof serviceSchema>
+
+  export type WidgetSettings ={
+    color:string,
+    widgetButtonText:string,
+    thankyouText:string
+  }
