@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { AnimatePresence } from "framer-motion";
 import { useWidget } from "../hooks/widget-info";
@@ -27,6 +27,12 @@ export const Widget = ({ companySlug }: Props) => {
   );
 
   const { open: openSuccess, setOpen: setOpenSuccess } = useOpenSuccess();
+  useEffect(() => {
+    if (company) {
+      // Notify the parent window that the widget is ready
+      window.parent.postMessage('widget-ready', '*');
+    }
+  }, [company]);
 
   if (!company) return null;
 
