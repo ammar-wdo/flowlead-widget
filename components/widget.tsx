@@ -45,14 +45,14 @@ export const Widget = ({ companySlug }: Props) => {
                 </div>
               )}
               {isError && (
-                <div className="bg-white h-[98.7vh] flex items-center justify-center">
+                <div className="bg-white h-[98.6vh] flex items-center justify-center">
                   <p className="mt-4 text-xl font-semibold text-rose-500">
                     Oops...Something went wrong!
                   </p>
                 </div>
               )}
               {company && (
-                <div className="bg-white rounded-3xl sm:rounded-2xl h-[98.7vh]   overflow-y-hidden relative ">
+                <div className="bg-white rounded-3xl sm:rounded-2xl h-[98.6vh]   overflow-y-hidden relative ">
                   <div className="flex items-center justify-between px-3   border-b h-12">
                   { selectedForm ?  <button
                       type="button"
