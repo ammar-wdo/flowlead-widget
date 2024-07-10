@@ -53,7 +53,7 @@ export const Widget = ({ companySlug }: Props) => {
                 </div>
               )}
               {company && (
-                <div className="bg-white rounded-3xl sm:rounded-xl h-[98.6vh]   overflow-y-hidden relative ">
+                <div className="bg-white rounded-3xl sm:rounded-2xl h-[98.6vh]   overflow-y-hidden relative ">
                   <div className="flex items-center justify-between px-3   border-b h-12">
                   { selectedForm ?  <button
                       type="button"
