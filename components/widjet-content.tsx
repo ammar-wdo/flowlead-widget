@@ -456,7 +456,7 @@ const SelectedForm = ({
       <FormPreviewComponent {...formPreview}>
         <form
           onSubmit={formPreview.handleSubmit(onSubmit)}
-          className="flex flex-col gap-4      pb-24  overflow-y-auto  w-full h-[calc(85vh-50px)] noScroll  sm:h-[calc(85vh-50px)]  "
+          className="flex flex-col gap-4      pb-24  overflow-y-auto  w-full h-[calc(98.5vh-50px)] noScroll  sm:h-[calc(98.5vh-50px)]  "
         >
          
           

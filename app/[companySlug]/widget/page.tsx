@@ -12,7 +12,7 @@ const page =async ({params:{companySlug}}: Props) => {
 
 
   return (
-    <div className="fixed right-1 bottom-1">
+    <div className="w-full h-full">
 
 <Widget companySlug={companySlug} />
     </div>

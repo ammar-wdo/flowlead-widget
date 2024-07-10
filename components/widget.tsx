@@ -35,24 +35,24 @@ export const Widget = ({ companySlug }: Props) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className=" mb-3   rounded-3xl bg-second p-1 sm:p-2   flex-1  z-[999]  fixed bottom-px sm:bottom-3 right-px sm:right-3 w-[98vw]    max-w-[400px]   2xl:max-w-[500px] overflow-y-auto noScroll  "
+            className="     rounded-3xl bg-second p-1 sm:p-2   flex-1  z-[999]  fixed bottom-0   right-0   w-full   2xl:max-w-[500px] overflow-y-auto noScroll  "
           >
            
               {isLoading && (
-                <div className=" flex items-center justify-center   bg-white flex-col    h-[85vh]">
+                <div className=" flex items-center justify-center   bg-white flex-col    h-[100vh]">
                   <Loader size={20} className="animate-spin block" />
                   <p className="mt-4 text-xl text-gray-400">Loading Data...</p>
                 </div>
               )}
               {isError && (
-                <div className="bg-white h-[85vh] flex items-center justify-center">
+                <div className="bg-white h-[98.5vh] flex items-center justify-center">
                   <p className="mt-4 text-xl font-semibold text-rose-500">
                     Oops...Something went wrong!
                   </p>
                 </div>
               )}
               {company && (
-                <div className="bg-white rounded-3xl sm:rounded-2xl h-[85vh]   overflow-y-hidden relative ">
+                <div className="bg-white rounded-3xl sm:rounded-2xl h-[98.5vh]   overflow-y-hidden relative ">
                   <div className="flex items-center justify-between px-3   border-b h-12">
                   { selectedForm ?  <button
                       type="button"
@@ -87,13 +87,13 @@ export const Widget = ({ companySlug }: Props) => {
         onClick={() => {setOpen((prev) => !prev); window.parent.postMessage(open ? 'close-widget' : 'open-widget', '*')}}
         type="button"
         className={cn(
-          "p-1 border-transparent  border-2 rounded-md  w-fit py-2 px-8 bg-second flex items-center ml-auto fixed bottom-3 right-3 text-white hover:bg-second/80 transition font-semibold ",
+          "p-1 border-transparent  border-2 rounded-md    py-2 px-8 bg-second flex items-center ml-auto fixed bottom-0 right-0 w-[150px] h-[50px] text-white hover:bg-second/80 transition font-semibold ",
           open && "opacity-0 pointer-events-none"
         )}
       >
         Widget
         <ChevronDown
-          className={open ? "rotate-180 transition ml-3" : "transition ml-3"}
+          className={open ? "rotate-180 transition ml-3 shrink-0" : "transition ml-3 shrink-0"}
         />
       </button>
     </div>
