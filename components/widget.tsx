@@ -27,12 +27,7 @@ export const Widget = ({ companySlug }: Props) => {
   );
 
   const { open: openSuccess, setOpen: setOpenSuccess } = useOpenSuccess();
-  useEffect(() => {
-    if (company) {
-      // Notify the parent window that the widget is ready
-      window.parent.postMessage('widget-ready', '*');
-    }
-  }, [company]);
+ 
 
   if (!company) return null;
 
