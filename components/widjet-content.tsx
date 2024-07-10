@@ -78,7 +78,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
-              className="flex flex-col gap-2 px-3 mt-4 b  h-[calc(98vh-24px)] overflow-y-auto"
+              className="flex flex-col gap-2 px-3 mt-4 b  h-[calc(98vh-50px)] overflow-y-auto pb-24 noScroll"
             >
               {forms.map((form,i) => (
                 <div     key={form.id}>

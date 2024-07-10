@@ -66,7 +66,7 @@ export const Widget = ({ companySlug }: Props) => {
                     <button
                       type="button"
                       title="close"
-                      onClick={() => {setOpen(false);setSelectedForm(undefined)}}
+                      onClick={() => {setOpen(false);setSelectedForm(undefined); window.parent.postMessage(  'close-widget' , '*')}}
                       className="flex  items-center justify-center w-8 h-8   rounded-full bg-white hover:bg-muted transition"
                     >
                       <XIcon />
@@ -84,7 +84,7 @@ export const Widget = ({ companySlug }: Props) => {
         )}
       </AnimatePresence>
       <button
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => {setOpen((prev) => !prev); window.parent.postMessage(open ? 'close-widget' : 'open-widget', '*')}}
         type="button"
         className={cn(
           "p-1 border-transparent  border-2 rounded-md  w-fit py-2 px-8 bg-second flex items-center ml-auto fixed bottom-3 right-3 text-white hover:bg-second/80 transition font-semibold ",
