@@ -101,7 +101,7 @@ export const Widget = ({ companySlug }: Props) => {
                         <span className="shrink-0 ">  <CheckCircle size={60} className="text-green-600 " /></span>
                       
                         <h3 className="font-semibold">Thank you for your request</h3>
-                        <p className="text-sm text-muted-foreground">{company.widgetSettings.thankyouText}</p>
+                        <p className="text-sm text-muted-foreground text-center">{company.widgetSettings.thankyouText}</p>
                         </div>
                       <button
                         onClick={() => {
