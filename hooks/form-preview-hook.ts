@@ -92,7 +92,7 @@ export const useFormPreview = (form: FormWithCompany) => {
       });
       if (!data.success) return toast.error(data.error);
 
-      toast.success(data.message);
+    
       setOpen(true)
     } catch (error) {
       console.error(error);
