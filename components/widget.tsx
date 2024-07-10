@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useWidget } from "../hooks/widget-info";
 import Motion from "./motion";
-import { ArrowLeft, ChevronDown, Loader, XIcon } from "lucide-react";
+import { ArrowLeft, CheckCircle, ChevronDown, Loader, XIcon } from "lucide-react";
 import WidgetContent from "./widjet-content";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -97,7 +97,12 @@ export const Widget = ({ companySlug }: Props) => {
                       exit={{ opacity: 0, y: -20 }}
                       className="h-[calc(98vh-50px)] flex items-center flex-col justify-center p-4"
                     >
-                      {company.widgetSettings.thankyouText}
+                      <div className="flex-1 flex justify-center items-center flex-col gap-3">
+                        <span className="shrink-0 ">  <CheckCircle size={60} className="text-green-600 " /></span>
+                      
+                        <h3 className="font-semibold">Thank you for your request</h3>
+                        <p className="text-sm text-muted-foreground">{company.widgetSettings.thankyouText}</p>
+                        </div>
                       <button
                         onClick={() => {
                           setOpenSuccess(false);
