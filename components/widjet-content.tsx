@@ -1,6 +1,6 @@
 import { useFormPreview } from "@/hooks/form-preview-hook";
 import { cn, isFieldVisible } from "@/lib/utils";
-import { Company, Element, Form, Service } from "@/types";
+import { Company, Element, Form, Service, WidgetSettings } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -48,6 +48,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
   const queryClient = useQueryClient();
   const company = queryClient.getQueryData(["widget"]) as Company & {
     forms: Form[];
+    widgetSettings:WidgetSettings
   };
 
   const forms = company.forms;
@@ -68,6 +69,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
             form={form}
             companyEmail={company.companyEmail}
             companyname={company.name}
+            widgetSettings={company.widgetSettings}
           />
         </motion.div>
       ) : (
@@ -120,6 +122,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
                 form={forms.find((el) => el.id === selectedForm)!}
                 companyEmail={company.companyEmail}
                 companyname={company.name}
+                widgetSettings={company.widgetSettings}
               />
             </motion.div>
           )}
@@ -135,10 +138,12 @@ const SelectedForm = ({
   form,
   companyname,
   companyEmail,
+  widgetSettings
 }: {
   form: Form;
   companyname: string;
   companyEmail: string;
+  widgetSettings:WidgetSettings
 }) => {
   const {
     formPreview,
@@ -491,7 +496,8 @@ const SelectedForm = ({
           <div className="flex flex-col gap-1 z-10 py-3 bg-white  pb-4 sm:pb-3    border-t px-3 absolute bottom-0 left-0 w-full">
             {currentStep < steps.length - 1 && (
               <Button
-                className="px-8  w-full ml-auto bg-second py-6 hover:bg-second/80"
+              style={{backgroundColor:widgetSettings.color}}
+                className="px-8  w-full ml-auto hover:opacity-90 py-6 "
                 type="button"
                 onClick={handleNext}
               >
@@ -500,7 +506,8 @@ const SelectedForm = ({
             )}
             {currentStep === steps.length - 1 && (
               <Button
-                className="px-8  bg-second w-full  py-6 hover:bg-second/80"
+              style={{backgroundColor:widgetSettings.color}}
+                className="px-8  hover:opacity-90 w-full  py-6 "
                 disabled={isLoading}
                 type="submit"
               >

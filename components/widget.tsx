@@ -32,10 +32,11 @@ export const Widget = ({ companySlug }: Props) => {
       <AnimatePresence>
         {open && (
           <Motion
+          style={{backgroundColor:company.widgetSettings.color}}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="     rounded-3xl bg-second p-2  flex-1  z-[999]  fixed bottom-0   right-0   w-full   overflow-y-auto noScroll  "
+            className="     rounded-3xl   p-2  flex-1  z-[999]  fixed bottom-0   right-0   w-full   overflow-y-auto noScroll  "
           >
            
               {isLoading && (
@@ -84,15 +85,17 @@ export const Widget = ({ companySlug }: Props) => {
         )}
       </AnimatePresence>
       <button
+      style={{backgroundColor:company.widgetSettings.color}}
         onClick={() => {setOpen((prev) => !prev); window.parent.postMessage(open ? 'close-widget' : 'open-widget', '*')}}
         type="button"
         className={cn(
-          "p-1 border-transparent  border-2 rounded-md    py-2 px-8 bg-second flex items-center ml-auto fixed bottom-0 right-0 w-[150px] h-[50px] text-white hover:bg-second/80 transition font-semibold ",
-          open && "opacity-0 pointer-events-none"
+          "p-1 border-transparent  border-2 rounded-md hover:opacity-90 transition  justify-center  flex items-center ml-auto fixed bottom-0 right-0 w-[150px] h-[50px] text-sm text-white     font-semibold ",
+          open && "opacity-0 pointer-events-none "
         )}
       >
-        Widget
+       {company.widgetSettings.widgetButtonText}
         <ChevronDown
+        size={13}
           className={open ? "rotate-180 transition ml-3 shrink-0" : "transition ml-3 shrink-0"}
         />
       </button>
