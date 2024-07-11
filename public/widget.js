@@ -29,7 +29,7 @@
     iframe.style.height = '50px'; // Minimized button size
     iframe.style.border = 'none';
     iframe.style.zIndex = '9999';
-    // iframe.style.transition = 'width 0.3s, height 0.3s'; // Smooth transition
+   
      iframe.style.borderRadius="6px"
  
      iframe.style.overflow='hidden'
@@ -49,18 +49,12 @@
       } else if (event.data === 'close-widget') {
         iframe.style.width = '150px';
         iframe.style.height = '50px';
-        setTimeout(() => {
-          iframe.style.borderRadius = '6px';
-        }, 300)
+        iframe.style.borderRadius = '6px';
+   
       }
     });
 
-    // Adjust iframe size on window resize
-    // window.addEventListener('resize', () => {
-    //   if (iframe.style.width !== '50px') {
-    //     setIframeSize(iframe);
-    //   }
-    // });
+ 
   }
 
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
