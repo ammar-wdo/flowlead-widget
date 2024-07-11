@@ -87,21 +87,21 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
                 <article
                   onClick={() => setSelectedForm(form.id)}
               
-                  className="  hover:bg-muted rounded-md p-3 cursor-pointer  gap-2  transition  flex items-start justify-between"
+                  className="  hover:bg-muted rounded-md p-3 cursor-pointer  gap-6  transition  flex items-start justify-between"
                 >
                   <div>
-                  <h4 className=" text-prime font-semibold">
+                  <h4 className=" text-prime font-[500]">
                     {form.name}
                   </h4>
 
                   {form.description && (
                     <p
-                      className="text-xs text-gray-400 line-clamp-4"
+                      className="text-xs text-gray-400 line-clamp-4 mt-2"
                       dangerouslySetInnerHTML={{ __html: form.description }}
                     />
                   )}
                   </div>
-                  <div className="relative w-[150px] h-[100px] rounded-xl overflow-hidden shrink-0">
+                  <div className="relative w-[100px] h-[75px] rounded-xl overflow-hidden shrink-0">
                     {form.logo && <Image alt="logo"  src={form.logo} fill  className="object-cover"/>}
                   </div>
                 
