@@ -18,6 +18,17 @@
     }
   }
 
+  function injectCSS() {
+    const style = document.createElement('style');
+  
+    style.innerHTML = `
+      .no-scroll {
+        overflow: hidden !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   function createChatWidget() {
     var iframe = document.createElement('iframe');
     iframe.src = `https://flowlead-widget.vercel.app/${companySlug}/widget`;
@@ -36,6 +47,9 @@
      iframe.style.display = 'none'; 
     document.body.appendChild(iframe);
 
+        // Inject CSS to disable scrolling
+        injectCSS();
+
     // Listen to messages from the iframe to toggle the widget size
     window.addEventListener('message', (event) => {
       if (event.data.type === 'widget-ready') {
@@ -46,10 +60,12 @@
       if (event.data === 'open-widget') {
         setIframeSize(iframe);
         iframe.style.borderRadius="25px"
+        document.body.classList.add('no-scroll'); 
       } else if (event.data === 'close-widget') {
         iframe.style.width = '150px';
         iframe.style.height = '50px';
         iframe.style.borderRadius = '6px';
+        document.body.classList.remove('no-scroll')
    
       }
     });
