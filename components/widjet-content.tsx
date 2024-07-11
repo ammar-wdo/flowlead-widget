@@ -83,14 +83,14 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
               className="flex flex-col gap-2 px-3 mt-4 b  h-[calc(98vh-50px)] overflow-y-auto pb-32 noScroll"
             >
               {forms.map((form,i) => (
-                <div     key={form.id}>
+                <div     key={form.id} className="px-4">
                 <article
                   onClick={() => setSelectedForm(form.id)}
               
                   className="  hover:bg-muted rounded-md p-3 cursor-pointer  gap-2  transition  flex items-start justify-between"
                 >
                   <div>
-                  <h4 className="font-semibold text-muted-foreground">
+                  <h4 className=" text-prime font-semibold">
                     {form.name}
                   </h4>
 
@@ -470,7 +470,7 @@ const SelectedForm = ({
 <Image src={form.logo} alt="logo" fill  className="object-cover"/>
 {/* <Image src={form.logo} alt="logo" fill  className="object-contain z-20"/> */}
           </div>}
-          <div className="md:px-8 px-2">
+          <div className="px-4">
           <div className="mt-4">
               <h4 className="font-semibold px-3  ">{form.name}</h4>
 

@@ -31,7 +31,7 @@
 
   function createChatWidget() {
     var iframe = document.createElement('iframe');
-    iframe.src = `https://flowlead-widget.vercel.app/${companySlug}/widget`;
+    iframe.src = `http://localhost:3001/${companySlug}/widget`;
     
     iframe.style.position = 'fixed';
     iframe.style.bottom = window.innerWidth < 600 ? '3px' : '20px';  // Initial bottom position
