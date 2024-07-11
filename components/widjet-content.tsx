@@ -470,7 +470,8 @@ const SelectedForm = ({
 <Image src={form.logo} alt="logo" fill  className="object-cover"/>
 {/* <Image src={form.logo} alt="logo" fill  className="object-contain z-20"/> */}
           </div>}
-            <div className="mt-4">
+          <div className="px-12">
+          <div className="mt-4">
               <h4 className="font-semibold px-3  ">{form.name}</h4>
 
               {form.description && (
@@ -491,6 +492,8 @@ const SelectedForm = ({
                 {renderElement(element)}
               </motion.div>
             ))}
+          </div>
+        
          
 
           <div className="flex flex-col gap-1 z-10 py-3 bg-white  pb-4 sm:pb-3    border-t px-3 absolute bottom-0 left-0 w-full">
