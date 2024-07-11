@@ -470,7 +470,7 @@ const SelectedForm = ({
 <Image src={form.logo} alt="logo" fill  className="object-cover"/>
 {/* <Image src={form.logo} alt="logo" fill  className="object-contain z-20"/> */}
           </div>}
-          <div className="px-8">
+          <div className="md:px-8 px-2">
           <div className="mt-4">
               <h4 className="font-semibold px-3  ">{form.name}</h4>
 
