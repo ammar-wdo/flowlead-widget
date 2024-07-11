@@ -53,23 +53,23 @@ export const Widget = ({ companySlug }: Props) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="     rounded-3xl   p-2  flex-1  z-[999]  fixed bottom-0   right-0   w-full   overflow-y-auto noScroll  "
+          className="     rounded-3xl   p-2  flex-1  z-[999]  fixed bottom-0   right-0   w-full h-full  overflow-y-auto noScroll  "
         >
           {isLoading && (
-            <div className=" flex items-center justify-center   bg-white flex-col    h-[98.9vh]">
+            <div className=" flex items-center justify-center   bg-white flex-col    h-full">
               <Loader size={20} className="animate-spin block" />
               <p className="mt-4 text-xl text-gray-400">Loading Data...</p>
             </div>
           )}
           {isError && (
-            <div className="bg-white h-[98.6vh] flex items-center justify-center">
+            <div className="bg-white h-full flex items-center justify-center">
               <p className="mt-4 text-xl font-semibold text-rose-500">
                 Oops...Something went wrong!
               </p>
             </div>
           )}
           {company && (
-            <div className="bg-white rounded-3xl sm:rounded-2xl h-[98.6vh]   overflow-y-hidden relative ">
+            <div className="bg-white rounded-3xl sm:rounded-2xl h-full   overflow-y-hidden relative ">
               <div className="flex items-center justify-between px-3   border-b h-12">
                 {selectedForm ? (
                   <button
