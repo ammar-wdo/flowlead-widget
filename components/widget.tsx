@@ -27,6 +27,7 @@ export const Widget = ({ companySlug }: Props) => {
   useEffect(()=>{
     if(!company) return
     window.parent.postMessage({ type: 'widget-ready', color: company.widgetSettings.color }, '*')
+    console.log("ready")
 
   },[company])
   console.log("company", company);

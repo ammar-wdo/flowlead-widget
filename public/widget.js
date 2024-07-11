@@ -31,13 +31,15 @@
     iframe.style.zIndex = '1000';
     iframe.style.transition = 'width 0.3s, height 0.3s'; // Smooth transition
      iframe.style.borderRadius="6px"
+     iframe.style.backgroundColor='red'
+     iframe.style.overflow='hidden'
      iframe.style.display = 'none'; 
     document.body.appendChild(iframe);
 
     // Listen to messages from the iframe to toggle the widget size
     window.addEventListener('message', (event) => {
       if (event.data.type === 'widget-ready') {
-      iframe.style.backgroundColor = event.data.color
+      // iframe.style.backgroundColor = event.data.color
       iframe.style.display = 'block';
         console.log('Widget color:', event.data.color);  // Log the color or use it as needed
       }
@@ -47,16 +49,18 @@
       } else if (event.data === 'close-widget') {
         iframe.style.width = '150px';
         iframe.style.height = '50px';
-        iframe.style.borderRadius="6px"
+        setTimeout(() => {
+          iframe.style.borderRadius = '6px';
+        }, 300)
       }
     });
 
     // Adjust iframe size on window resize
-    window.addEventListener('resize', () => {
-      if (iframe.style.width !== '50px') {
-        setIframeSize(iframe);
-      }
-    });
+    // window.addEventListener('resize', () => {
+    //   if (iframe.style.width !== '50px') {
+    //     setIframeSize(iframe);
+    //   }
+    // });
   }
 
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
