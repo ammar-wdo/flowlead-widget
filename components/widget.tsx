@@ -16,11 +16,19 @@ type Props = {
 };
 
 export const Widget = ({ companySlug }: Props) => {
+
+ 
   const searchParams = useSearchParams();
   const [open, setOpen] = useState(
     !!(searchParams.get("openWidget") === "true")
   );
   const { data: company, isLoading, isError, error } = useWidget(companySlug);
+
+  useEffect(()=>{
+    if(!company) return
+    window.parent.postMessage({ type: 'widget-ready', color: company.widgetSettings.color }, '*')
+
+  },[company])
   console.log("company", company);
   const [selectedForm, setSelectedForm] = useState<string | undefined>(
     undefined
