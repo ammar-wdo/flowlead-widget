@@ -28,7 +28,7 @@
     iframe.style.width = '150px'; // Minimized button size
     iframe.style.height = '50px'; // Minimized button size
     iframe.style.border = 'none';
-    iframe.style.zIndex = '1000';
+    iframe.style.zIndex = '9999';
     iframe.style.transition = 'width 0.3s, height 0.3s'; // Smooth transition
      iframe.style.borderRadius="6px"
  
