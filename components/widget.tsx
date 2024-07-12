@@ -31,8 +31,9 @@ export const Widget = ({ companySlug }: Props) => {
 
   useEffect(() => {
     if (!company) return;
+    console.log("emit position",company.widgetSettings.widgetPostion)
     window.parent.postMessage(
-      { type: "widget-ready", color: company.widgetSettings.color },
+      { type: "widget-ready", color: company.widgetSettings.color ,side:company.widgetSettings.widgetPostion},
       "*"
     );
     console.log("ready");

@@ -3,7 +3,7 @@
   const scriptTag = document.currentScript;
       const companySlug = scriptTag.getAttribute('data-id');
 
-
+let side
   function injectCSS() {
     const style = document.createElement('style');
   
@@ -22,8 +22,15 @@
       iframe.style.width = '100vw';
       iframe.style.height = '100vh';
       iframe.style.bottom = '0px';
-      iframe.style.right = '0px'
+      if (side === "RIGHT") {
+        iframe.style.right = '0px';
+        iframe.style.left = '';
+      } else {
+        iframe.style.left = '0px';
+        iframe.style.right = '';
+      }
       document.body.classList.add('no-scroll-flowlead-widget')
+      
     } else if (width >= 600 && width < 1200) {
       iframe.style.width = '400px';
       iframe.style.height = '90vh';
@@ -42,11 +49,11 @@
 
   function createChatWidget() {
     var iframe = document.createElement('iframe');
-    iframe.src = `http://localhost:3001/${companySlug}/widget`;
+    iframe.src = `https://flowlead-widget.vercel.app/${companySlug}/widget`;
     
     iframe.style.position = 'fixed';
     iframe.style.bottom = window.innerWidth < 600 ? '10px' : '20px';  // Initial bottom position
-    iframe.style.right = window.innerWidth < 600 ? '10px' : '20px';   // Initial right position
+   
     iframe.style.width = '150px'; // Minimized button size
     iframe.style.height = '50px'; // Minimized button size
     iframe.style.border = 'none';
@@ -64,9 +71,18 @@
     // Listen to messages from the iframe to toggle the widget size
     window.addEventListener('message', (event) => {
       if (event.data.type === 'widget-ready') {
+        side = event.data.side
+        if (side === "RIGHT") {
+          iframe.style.right = window.innerWidth < 600 ? '10px' : '20px';
+          iframe.style.left = '';
+        } else {
+          iframe.style.left = window.innerWidth < 600 ? '10px' : '20px';
+          iframe.style.right = '';
+        }
+        console.log("position",event.data.side)
       iframe.style.backgroundColor = event.data.color
       iframe.style.display = 'block';
-       
+    
       }
       if (event.data === 'open-widget') {
         setIframeSize(iframe);
@@ -81,7 +97,13 @@
         iframe.style.borderRadius = '6px';
         document.body.classList.remove('no-scroll-flowlead-widget')
         iframe.style.bottom = window.innerWidth < 600 ? '10px' : '20px';  // Initial bottom position
-        iframe.style.right = window.innerWidth < 600 ? '10px' : '20px';
+        if (side === "RIGHT") {
+          iframe.style.right = window.innerWidth < 600 ? '10px' : '20px';
+          iframe.style.left = '';
+        } else {
+          iframe.style.left = window.innerWidth < 600 ? '10px' : '20px';
+          iframe.style.right = '';
+        }
    
       }
     });

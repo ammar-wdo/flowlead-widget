@@ -250,5 +250,6 @@ const formSchema = z.object({
   export type WidgetSettings ={
     color:string,
     widgetButtonText:string,
-    thankyouText:string
+    thankyouText:string,
+    widgetPostion:"RIGHT" | "LEFT"
   }
