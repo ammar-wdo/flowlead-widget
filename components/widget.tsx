@@ -50,9 +50,7 @@ export const Widget = ({ companySlug }: Props) => {
       {open ? (
         <Motion
           style={{ backgroundColor: company.widgetSettings.color }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+         
           className="     rounded-3xl   p-2  flex-1  z-[999]  fixed bottom-0   right-0   w-full h-full  overflow-y-auto noScroll  "
         >
           {isLoading && (
