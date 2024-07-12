@@ -48,7 +48,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
   const queryClient = useQueryClient();
   const company = queryClient.getQueryData(["widget"]) as Company & {
     forms: Form[];
-    widgetSettings:WidgetSettings
+    widgetSettings: WidgetSettings;
   };
 
   const forms = company.forms;
@@ -82,31 +82,36 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
               exit={{ opacity: 0, x: -30 }}
               className="flex flex-col gap-2 px-3 mt-4 b  h-[calc(98vh-50px)] overflow-y-auto pb-32 noScroll"
             >
-              {forms.map((form,i) => (
-                <div     key={form.id} className="px-4 noScroll">
-                <article
-                  onClick={() => setSelectedForm(form.id)}
-              
-                  className="  hover:bg-muted rounded-md p-3 cursor-pointer  gap-6  transition  flex items-start justify-between "
-                >
-                  <div>
-                  <h4 className=" text-prime font-[500]">
-                    {form.name}
-                  </h4>
+              {forms.map((form, i) => (
+                <div key={form.id} className="  noScroll">
+                  <article
+                    onClick={() => setSelectedForm(form.id)}
+                    className="  hover:bg-muted rounded-md p-3 cursor-pointer  gap-6  transition  flex items-start justify-between "
+                  >
+                    <div>
+                      <h4 className=" text-prime font-[500]">{form.name}</h4>
 
-                  {form.description && (
-                    <p
-                      className="text-xs text-gray-400 line-clamp-4 mt-2"
-                      dangerouslySetInnerHTML={{ __html: form.description }}
-                    />
+                      {form.description && (
+                        <p
+                          className="text-xs text-gray-400 line-clamp-4 mt-2"
+                          dangerouslySetInnerHTML={{ __html: form.description }}
+                        />
+                      )}
+                    </div>
+                    <div className="relative w-[100px] h-[75px] rounded-xl overflow-hidden shrink-0">
+                      {form.logo && (
+                        <Image
+                          alt="logo"
+                          src={form.logo}
+                          fill
+                          className="object-cover"
+                        />
+                      )}
+                    </div>
+                  </article>
+                  {i < forms.length - 1 && (
+                    <div className="h-px w-full my-3 bg-gray-200" />
                   )}
-                  </div>
-                  <div className="relative w-[100px] h-[75px] rounded-xl overflow-hidden shrink-0">
-                    {form.logo && <Image alt="logo"  src={form.logo} fill  className="object-cover"/>}
-                  </div>
-                
-                </article>
-                {(i< forms.length-1) && <div className="h-px w-full my-3 bg-gray-200"/>}
                 </div>
               ))}
             </motion.section>
@@ -138,12 +143,12 @@ const SelectedForm = ({
   form,
   companyname,
   companyEmail,
-  widgetSettings
+  widgetSettings,
 }: {
   form: Form;
   companyname: string;
   companyEmail: string;
-  widgetSettings:WidgetSettings
+  widgetSettings: WidgetSettings;
 }) => {
   const {
     formPreview,
@@ -463,15 +468,15 @@ const SelectedForm = ({
           onSubmit={formPreview.handleSubmit(onSubmit)}
           className="flex flex-col gap-4      pb-52  overflow-y-auto  w-full h-[calc(98.5vh-50px)] noScroll  sm:h-[calc(98.5vh-50px)]  noScroll"
         >
-         
-          
-          {form.logo && <div className="w-full min-h-[250px]  relative block  noScroll">
-            {/* <div  className="absolute inset-0 bg-black/20 z-10 backdrop-blur-sm"/> */}
-<Image src={form.logo} alt="logo" fill  className="object-cover"/>
-{/* <Image src={form.logo} alt="logo" fill  className="object-contain z-20"/> */}
-          </div>}
+          {form.logo && (
+            <div className="w-full min-h-[250px]  relative block  noScroll">
+              {/* <div  className="absolute inset-0 bg-black/20 z-10 backdrop-blur-sm"/> */}
+              <Image src={form.logo} alt="logo" fill className="object-cover" />
+              {/* <Image src={form.logo} alt="logo" fill  className="object-contain z-20"/> */}
+            </div>
+          )}
           <div className="">
-          <div className="mt-4">
+            <div className="mt-4">
               <h4 className="font-semibold px-3  ">{form.name}</h4>
 
               {form.description && (
@@ -493,13 +498,11 @@ const SelectedForm = ({
               </motion.div>
             ))}
           </div>
-        
-         
 
           <div className="flex flex-col gap-1 z-10 py-3 bg-white  pb-4 sm:pb-3    border-t px-3 absolute bottom-0 left-0 w-full">
             {currentStep < steps.length - 1 && (
               <Button
-              style={{backgroundColor:widgetSettings.color}}
+                style={{ backgroundColor: widgetSettings.color }}
                 className="px-8  w-full ml-auto hover:opacity-90 py-6 "
                 type="button"
                 onClick={handleNext}
@@ -509,7 +512,7 @@ const SelectedForm = ({
             )}
             {currentStep === steps.length - 1 && (
               <Button
-              style={{backgroundColor:widgetSettings.color}}
+                style={{ backgroundColor: widgetSettings.color }}
                 className="px-8  hover:opacity-90 w-full  py-6 "
                 disabled={isLoading}
                 type="submit"
@@ -734,7 +737,7 @@ const ServiceCheckBoxView = ({
               <FormLabel className=" capitalize cursor-pointer ">
                 {option.name}
               </FormLabel>
-             
+
               <div className="flex items-center justify-between">
                 <p className="">${option.price}</p>
                 {!!option.enableQuantity &&
@@ -894,19 +897,17 @@ const ServiceRadioView = ({
         <FormItem className="grid grid-cols-1   gap-4 space-y-0">
           {serviceElement.options.map((option, i) => (
             <div
-              onClick={() =>{
-                !!(field.value?.id === option.id) ?
-                field.onChange(undefined)
-                :
-                
-                field.onChange({
-                  ...option,
-                  quantity: 1,
-                  serviceName: serviceElement.name,
-                  serviceId: serviceElement.id,
-                  taxPercentage: serviceElement.taxPercentage,
-                })}
-              }
+              onClick={() => {
+                !!(field.value?.id === option.id)
+                  ? field.onChange(undefined)
+                  : field.onChange({
+                      ...option,
+                      quantity: 1,
+                      serviceName: serviceElement.name,
+                      serviceId: serviceElement.id,
+                      taxPercentage: serviceElement.taxPercentage,
+                    });
+              }}
               key={option.id}
               className={cn(
                 "grid grid-cols-2 gap-3 bg-white p-4 rounded-md border  h-[150px]",
@@ -920,7 +921,7 @@ const ServiceRadioView = ({
                 >
                   {option.name}
                 </FormLabel>
-              
+
                 <div className="flex items-center justify-between">
                   <p className="">${option.price}</p>
                   {!!option.enableQuantity && field.value?.id === option.id ? (
@@ -1115,7 +1116,7 @@ const ServiceDropDownView = ({
             <FormLabel className=" capitalize cursor-pointer ">
               {field.value.name}
             </FormLabel>
-           
+
             <div className="flex items-center justify-between">
               <p className="">${field.value.price}</p>
               {!!field.value?.id &&
