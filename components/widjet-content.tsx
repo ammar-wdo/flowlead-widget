@@ -55,7 +55,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
   const oneForm = forms.length === 1;
   const form = forms[0];
   return (
-    <div className=" pb-3    ">
+    <div className=" pb-3    noScroll">
       {/* one form */}
 
       {oneForm ? (
@@ -63,7 +63,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -30 }}
-          className=" "
+          className=" noScroll"
         >
           <SelectedForm
             form={form}
@@ -83,11 +83,11 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
               className="flex flex-col gap-2 px-3 mt-4 b  h-[calc(98vh-50px)] overflow-y-auto pb-32 noScroll"
             >
               {forms.map((form,i) => (
-                <div     key={form.id} className="px-4">
+                <div     key={form.id} className="px-4 noScroll">
                 <article
                   onClick={() => setSelectedForm(form.id)}
               
-                  className="  hover:bg-muted rounded-md p-3 cursor-pointer  gap-6  transition  flex items-start justify-between"
+                  className="  hover:bg-muted rounded-md p-3 cursor-pointer  gap-6  transition  flex items-start justify-between "
                 >
                   <div>
                   <h4 className=" text-prime font-[500]">
@@ -116,7 +116,7 @@ const WidgetContent = ({ selectedForm, setSelectedForm }: Props) => {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
-              className=" "
+              className=" noScroll"
             >
               <SelectedForm
                 form={forms.find((el) => el.id === selectedForm)!}
@@ -457,15 +457,15 @@ const SelectedForm = ({
   };
 
   return (
-    <section className=" relative">
+    <section className=" relative noScroll">
       <FormPreviewComponent {...formPreview}>
         <form
           onSubmit={formPreview.handleSubmit(onSubmit)}
-          className="flex flex-col gap-4      pb-52  overflow-y-auto  w-full h-[calc(98.5vh-50px)] noScroll  sm:h-[calc(98.5vh-50px)]  "
+          className="flex flex-col gap-4      pb-52  overflow-y-auto  w-full h-[calc(98.5vh-50px)] noScroll  sm:h-[calc(98.5vh-50px)]  noScroll"
         >
          
           
-          {form.logo && <div className="w-full min-h-[250px]  relative block  ">
+          {form.logo && <div className="w-full min-h-[250px]  relative block  noScroll">
             {/* <div  className="absolute inset-0 bg-black/20 z-10 backdrop-blur-sm"/> */}
 <Image src={form.logo} alt="logo" fill  className="object-cover"/>
 {/* <Image src={form.logo} alt="logo" fill  className="object-contain z-20"/> */}
@@ -484,7 +484,7 @@ const SelectedForm = ({
 
             {steps[currentStep].map((element) => (
               <motion.div
-                className="px-3 mt-8"
+                className="px-3 mt-8 noScroll"
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 key={`motion-${element.id}`}
