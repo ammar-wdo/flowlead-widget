@@ -7,8 +7,8 @@
     if (width < 600) {
       iframe.style.width = '100vw';
       iframe.style.height = '100vh';
-      iframe.style.bottom = '3px';
-      iframe.style.right = '3px'
+      iframe.style.bottom = '10px';
+      iframe.style.right = '10px'
     } else if (width >= 600 && width < 1200) {
       iframe.style.width = '400px';
       iframe.style.height = '90vh';
@@ -34,8 +34,8 @@
     iframe.src = `https://flowlead-widget.vercel.app/${companySlug}/widget`;
     
     iframe.style.position = 'fixed';
-    iframe.style.bottom = window.innerWidth < 600 ? '3px' : '20px';  // Initial bottom position
-    iframe.style.right = window.innerWidth < 600 ? '3px' : '20px';   // Initial right position
+    iframe.style.bottom = window.innerWidth < 600 ? '10px' : '20px';  // Initial bottom position
+    iframe.style.right = window.innerWidth < 600 ? '10px' : '20px';   // Initial right position
     iframe.style.width = '150px'; // Minimized button size
     iframe.style.height = '50px'; // Minimized button size
     iframe.style.border = 'none';
