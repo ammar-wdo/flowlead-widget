@@ -22,7 +22,7 @@
     const style = document.createElement('style');
   
     style.innerHTML = `
-      .no-scroll {
+      .no-scroll-flowlead-widget {
         overflow: hidden !important;
       }
     `;
@@ -60,12 +60,13 @@
       if (event.data === 'open-widget') {
         setIframeSize(iframe);
         iframe.style.borderRadius="25px"
-        document.body.classList.add('no-scroll'); 
+        if(width < 500)
+        {document.body.classList.add('no-scroll-flowlead-widget'); }
       } else if (event.data === 'close-widget') {
         iframe.style.width = '150px';
         iframe.style.height = '50px';
         iframe.style.borderRadius = '6px';
-        document.body.classList.remove('no-scroll')
+        document.body.classList.remove('no-scroll-flowlead-widget')
    
       }
     });
