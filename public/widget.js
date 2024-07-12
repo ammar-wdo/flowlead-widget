@@ -7,8 +7,8 @@
     if (width < 600) {
       iframe.style.width = '100vw';
       iframe.style.height = '100vh';
-      iframe.style.bottom = '0px';
-      iframe.style.right = '0px'
+      iframe.style.bottom = '3px';
+      iframe.style.right = '3px'
     } else if (width >= 600 && width < 1200) {
       iframe.style.width = '400px';
       iframe.style.height = '90vh';
@@ -60,8 +60,12 @@
       if (event.data === 'open-widget') {
         setIframeSize(iframe);
         iframe.style.borderRadius="25px"
-        if(width < 500)
-        {document.body.classList.add('no-scroll-flowlead-widget'); }
+        if(width < 600)
+        {document.body.classList.add('no-scroll-flowlead-widget');
+          
+        iframe.style.bottom = '0px';
+        iframe.style.right = '0px'
+        }
       } else if (event.data === 'close-widget') {
         iframe.style.width = '150px';
         iframe.style.height = '50px';
