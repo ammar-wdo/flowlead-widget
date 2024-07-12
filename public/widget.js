@@ -63,8 +63,8 @@
         if(width < 600)
         {document.body.classList.add('no-scroll-flowlead-widget');
           
-        iframe.style.bottom = '0px';
-        iframe.style.right = '0px'
+        iframe.style.bottom = '0';
+        iframe.style.right = '0'
         }
       } else if (event.data === 'close-widget') {
         iframe.style.width = '150px';
