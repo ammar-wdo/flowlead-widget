@@ -45,6 +45,7 @@ import { Textarea } from "./ui/textarea";
 import Image from "next/image";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { format } from "date-fns";
+import Optional from "./optional";
 
 type Props = {
   form: FormWithCompany;
@@ -101,11 +102,9 @@ const FormComponent = ({ form }: Props) => {
               <FormLabel className="flex items-center gap-1">
                 {fieldElement.label}
                 {fieldElement.validations?.required ? (
-                  "*"
+                  ""
                 ) : (
-                  <span className="py-1 px-2 rounded-md text-muted-foreground bg-slate-200 text-[9px]">
-                    Optional
-                  </span>
+               <Optional />
                 )}
               </FormLabel>
               <FormControl>
@@ -309,11 +308,9 @@ const FormComponent = ({ form }: Props) => {
               <FormLabel className="capitalize flex items-center gap-1">
                 {serviceElement.name}
                 {serviceElement.isRequired ? (
-                  "*"
+                  ""
                 ) : (
-                  <span className="py-1 px-2 rounded-md text-muted-foreground bg-slate-200 text-[9px]">
-                    Optional
-                  </span>
+               <Optional />
                 )}
               </FormLabel>
               <FormControl>
