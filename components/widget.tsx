@@ -167,7 +167,7 @@ export const Widget = ({ companySlug }: Props) => {
           }}
           type="button"
           className={cn(
-            "p-1 border-transparent  border-2 rounded-md hover:opacity-90 transition  justify-center  flex items-center ml-auto fixed bottom-0 right-0 w-full h-full text-sm text-white     font-semibold ",
+            "p-1 border-transparent  border-2 rounded-md hover:opacity-90 transition  justify-center  flex items-center ml-auto fixed bottom-0 right-0 w-full h-full text-sm text-white   max-w-[200px] max-h-[200px]  font-semibold ",
       
           )}
         >
