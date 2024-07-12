@@ -5,10 +5,10 @@
   function setIframeSize(iframe) {
     const width = window.innerWidth;
     if (width < 600) {
-      iframe.style.width = '98vw';
-      iframe.style.height = 'calc(100vh - 20px)';
-      iframe.style.bottom = '3px';
-      iframe.style.right = '3px'
+      iframe.style.width = '100vw';
+      iframe.style.height = '100vh';
+      iframe.style.bottom = '0px';
+      iframe.style.right = '0px'
     } else if (width >= 600 && width < 1200) {
       iframe.style.width = '400px';
       iframe.style.height = '90vh';

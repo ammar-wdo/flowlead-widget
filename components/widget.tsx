@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useWidget } from "../hooks/widget-info";
 import Motion from "./motion";
+import {motion} from 'framer-motion'
 import {
   ArrowLeft,
   CheckCircle,
@@ -156,7 +157,10 @@ export const Widget = ({ companySlug }: Props) => {
           )}
         </Motion>
       ) : (
-        <button
+        <motion.button
+        initial={{opacity:0}}
+        animate={{opacity:1}}
+    
           style={{ backgroundColor: company.widgetSettings.color }}
           onClick={() => {
             setOpen((prev) => !prev);
@@ -180,7 +184,7 @@ export const Widget = ({ companySlug }: Props) => {
                 : "transition ml-3 shrink-0"
             }
           />
-        </button>
+        </motion.button>
       )}
     </div>
   );
