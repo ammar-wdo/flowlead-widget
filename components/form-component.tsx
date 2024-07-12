@@ -120,7 +120,7 @@ const FormComponent = ({ form }: Props) => {
                   {fieldElement.type === "name" && (
                     <Input
                       {...field}
-                      onChange={(e) => field.onChange(e.target.value.trim())}
+                      onChange={(e) => field.onChange(e.target.value)}
                       value={field.value || ""}
                       placeholder={fieldElement.placeholder || ""}
                     />
