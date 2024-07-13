@@ -739,7 +739,7 @@ const ServiceCheckBoxView = ({
               </FormLabel>
 
               <div className="flex items-center justify-between">
-                <p className="">${option.price}</p>
+                <p className="">€{option.price}</p>
                 {!!option.enableQuantity &&
                 (
                   formPreview.watch(`${serviceElement.name}-service`) || []
@@ -923,7 +923,7 @@ const ServiceRadioView = ({
                 </FormLabel>
 
                 <div className="flex items-center justify-between">
-                  <p className="">${option.price}</p>
+                  <p className="">€{option.price}</p>
                   {!!option.enableQuantity && field.value?.id === option.id ? (
                     <div className="flex border items-center  h-8 bg-white text-black rounded-lg overflow-hidden">
                       <button
@@ -1118,7 +1118,7 @@ const ServiceDropDownView = ({
             </FormLabel>
 
             <div className="flex items-center justify-between">
-              <p className="">${field.value.price}</p>
+              <p className="">€{field.value.price}</p>
               {!!field.value?.id &&
               !!serviceElement.options.find((el) => el.id === field.value.id)
                 ?.enableQuantity ? (
@@ -1270,7 +1270,7 @@ const ServiceSinglepriceView = ({
             {serviceElement.options[0].description}
           </p>
           <div className="flex items-center justify-between">
-            <p className="">${serviceElement.options[0].price}</p>
+            <p className="">€{serviceElement.options[0].price}</p>
             {!!serviceElement.options[0].enableQuantity &&
             field.value?.id === serviceElement.options[0].id ? (
               <div className="flex border items-center h-8 bg-white text-black rounded-lg overflow-hidden">
